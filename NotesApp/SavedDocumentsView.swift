@@ -33,6 +33,7 @@ struct SavedDocumentsView: View {
     @Binding var tabSelection: Int
     @State var dataModel = DataStorageModel()
     @State var isSettingsPresented = false
+    @State var itemsCount: Int = 0
     
     func createDocument() {
         let name = "Document \(dataModel.getDocumentsArray().count + 1)"
@@ -98,12 +99,15 @@ struct SavedDocumentsView: View {
                                         Button {
                                             dataModel.addDocument(Document(name: document.name, text: document.text))
                                             dataModel = DataStorageModel()
+                                            itemsCount = dataModel.savedDocuments.count
                                         } label: {
                                             Label("Duplicate", systemImage: "doc.on.doc")
                                         }
                                         Button(role: .destructive) {
                                             dataModel.removeDocument(document)
                                             dataModel = DataStorageModel()
+                                            itemsCount = dataModel.savedDocuments.count
+                                            
                                         } label: {
                                             Label("Delete", systemImage: "trash")
                                         }
@@ -111,40 +115,33 @@ struct SavedDocumentsView: View {
                             }
                         } // LAZYVGRID
                         .padding()
+                        .animation(.easeInOut, value: columnCount)
                     Spacer()
                 } // VSTACK
             } // SCROLLVIEW
-        }.sheet(isPresented: $isSettingsPresented) {
+            
+        }
+        .sheet(isPresented: $isSettingsPresented) {
             VStack {
-                HStack {
-                    Button {
-                        isSettingsPresented = false
-                    } label: {
-                        Image(systemName: "x.circle")
-                            .font(.largeTitle)
-                    }
-                    .padding()
-                    
-                    Spacer()
-                }
-                
-                Spacer()
-                
                 HStack {
                     Text("Columns count: ")
                         .fontWeight(.medium)
                         .font(.title)
+                    
                     Spacer()
-                    Picker("Columns", selection: $columnCount) {
-                        ForEach(1...4, id: \.self) { columnCount in
-                            Text("\(columnCount)")
+                    
+                        Picker("Columns", selection: $columnCount) {
+                            ForEach(1...4, id: \.self) { columnCount in
+                                Text("\(columnCount)")
+                            }
                         }
-                    }
-                    .pickerStyle(.wheel)
-                    .frame(width: 100)
+                        .pickerStyle(.wheel)
+                        .frame(width: 100)
+                    
                 }
                 Spacer()
             }
+            .presentationDetents([.fraction(0.2), .height(400), .medium, .large])
             .padding(.horizontal)
         }
     }
@@ -183,6 +180,7 @@ struct DocumentView: View {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
                     .foregroundColor(.white)
+                    .shadow(radius: 5)
                 Text(document.text)
                     .padding(30 * fontSizeMultiplyer)
                     .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
@@ -190,7 +188,6 @@ struct DocumentView: View {
                     .zIndex(80)
             }
             .aspectRatio(3/4, contentMode: .fit)
-            .shadow(radius: 5)
             .padding([.top, .leading, .trailing])
             
             Text(document.name)

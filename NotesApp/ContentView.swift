@@ -13,10 +13,8 @@ enum Field: Int, CaseIterable {
 }
 
 struct ContentView: View {
-    @AppStorage("documents", store: .standard) var savedDocuments: [Document] = [Document(name: "test", text: "# Welcome test")]
     
-    @AppStorage("currentDocumentNumber") var currentDocumentNumber: Int = 0
-    
+    @State var dataModel = DataStorageModel()
     @State var currentName: String = "name"
     @State var currentText: String = "text"
     
@@ -79,13 +77,13 @@ struct ContentView: View {
             }
             .onAppear {
                 print("text editor visible")
-                currentName = savedDocuments[currentDocumentNumber].name
-                currentText = savedDocuments[currentDocumentNumber].text
+                currentName = dataModel.getCurrentName()
+                currentText = dataModel.getCurrentText()
             }
             .onDisappear {
                 print("text editor visible")
-                savedDocuments[currentDocumentNumber].name = currentName
-                savedDocuments[currentDocumentNumber].text = currentText
+                dataModel.setCurrentName(currentName)
+                dataModel.setCurrentText(currentText)
                 
             }
             .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing", isHidden: $isTextFieldHidden)

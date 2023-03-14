@@ -35,6 +35,15 @@ struct ContentView: View {
     
     @State var tabSelection = 1
     
+    var inputController = UIInputViewController()
+    
+    func symbolButton(_ symbol: String) -> some View {
+        Button(symbol) {
+            inputController.textDocumentProxy.insertText(symbol)
+        }
+        .buttonStyle(.bordered)
+        .padding(.horizontal, 5)
+    }
     
     var body: some View {
         
@@ -58,6 +67,7 @@ struct ContentView: View {
                         .alert("Save file", isPresented: $exportFile, actions: {
                             
                             TextField("File name", text: $currentName)
+                                .focused($focusedField, equals: .filename)
                             
                             Button("Cancel", action: {})
                             
@@ -77,6 +87,7 @@ struct ContentView: View {
             }
             .onAppear {
                 print("text editor visible")
+                dataModel = DataStorageModel()
                 currentName = dataModel.getCurrentName()
                 currentText = dataModel.getCurrentText()
             }
@@ -92,10 +103,22 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                    Button("`") {
+                    
+                    symbolButton("`")
+                    symbolButton("#")
+                    symbolButton("!")
+                    symbolButton("[")
+                    symbolButton("]")
+                    
+                    Button("**") {
+                        var str = inputController.textDocumentProxy.selectedText
                         
+                        if let selected = str {
+                            inputController.textDocumentProxy.insertText("*\(selected)*")
+                        }
                     }
                     .buttonStyle(.bordered)
+                    .padding(.horizontal, 5)
                     
                     Spacer()
                     

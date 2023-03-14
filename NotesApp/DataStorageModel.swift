@@ -48,4 +48,8 @@ struct DataStorageModel {
     func getCurrentText() -> String {
         savedDocuments[currentDocumentNumber].text
     }
+    
+    func getCurrentDocument() -> Document {
+        savedDocuments[currentDocumentNumber]
+    }
 }

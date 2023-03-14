@@ -35,7 +35,7 @@ struct SavedDocumentsView: View {
     @State var isSettingsPresented = false
     @State var itemsCount: Int = 0
     
-    func createDocument() {
+    func createDocument() -> Document {
         let name = "Document \(dataModel.getDocumentsArray().count + 1)"
         let text: String = """
         # \(name)
@@ -43,13 +43,7 @@ struct SavedDocumentsView: View {
         Enter your text here
         
         """
-        let document = Document(name: name, text: text)
-        
-        dataModel.addDocument(document)
-        dataModel.setCurrentDocument(document)
-        
-        tabSelection = 2
-        
+        return Document(name: name, text: text)
     }
     
     func getColumnsArray() -> [GridItem] {
@@ -75,7 +69,13 @@ struct SavedDocumentsView: View {
                 Spacer()
                 
                 Button {
-                    createDocument()
+                    let newDocument = createDocument()
+                    dataModel.addDocument(newDocument)
+                    dataModel.setCurrentDocument(newDocument)
+                    dataModel = DataStorageModel()
+                    itemsCount = dataModel.savedDocuments.count
+                    tabSelection = 2
+                    
                 } label: {
                     Image(systemName: "plus.circle")
                         .font(.largeTitle)
@@ -146,64 +146,6 @@ struct SavedDocumentsView: View {
         }
     }
 }
-
-struct DocumentView: View {
-    
-    var document: Document
-    var fontSizeMultiplyer: Double
-    
-    
-    init(_ document: Document, fontSizeMultiplyer: Double) {
-        self.document = document
-        self.fontSizeMultiplyer = fontSizeMultiplyer
-    }
-    
-    func getDateString(from date: Date) -> String {
-        let calendar = Calendar(identifier: .gregorian)
-        var dateString = ""
-        if calendar.isDateInToday(date) {
-            dateString = "Today"
-        } else if calendar.isDateInYesterday(date) {
-            dateString = "Yesterday"
-        }
-        else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE, MMM d"
-            dateString = dateFormatter.string(from: date)
-        }
-        return dateString
-    }
-    
-    var body: some View {
-        
-        VStack {
-            ZStack(alignment: .topLeading) {
-                RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
-                    .foregroundColor(.white)
-                    .shadow(radius: 5)
-                Text(document.text)
-                    .padding(30 * fontSizeMultiplyer)
-                    .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
-                    .foregroundColor(.black)
-                    .zIndex(80)
-            }
-            .aspectRatio(3/4, contentMode: .fit)
-            .padding([.top, .leading, .trailing])
-            
-            Text(document.name)
-                .font(.system(size: 14))
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-            
-            Text(getDateString(from: document.lastModified))
-                .font(.system(size: 10))
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .foregroundColor(.secondary)
-        }
-    }
-}
-
 
 struct SavedDocumentsView_Previews: PreviewProvider {
     static var previews: some View {

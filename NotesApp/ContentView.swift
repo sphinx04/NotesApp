@@ -7,10 +7,12 @@
 
 import SwiftUI
 import Markdown
+import HighlightedTextEditor
 
 enum Field: Int, CaseIterable {
     case input, filename, exportFile
 }
+let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 
 struct ContentView: View {
     
@@ -26,6 +28,7 @@ struct ContentView: View {
     
     @State var exportFileName = "name"
     @State private var exportFile = false
+    @State private var renameDocument = false
     
     @State private var isShareSheetPresented = false
     
@@ -33,12 +36,12 @@ struct ContentView: View {
     @State var isTextFieldHidden: Bool = true
     @State var isPreviewHidden: Bool = true
     
-    @State var tabSelection = 1
+    @State var tabSelection = 2
     
-    var inputController = UIInputViewController()
     
     func symbolButton(_ symbol: String) -> some View {
         Button(symbol) {
+            var inputController = UIInputViewController()
             inputController.textDocumentProxy.insertText(symbol)
         }
         .buttonStyle(.bordered)
@@ -62,28 +65,72 @@ struct ContentView: View {
             
             
             VStack(spacing: 0) {
-                if !isTextFieldHidden {
-                    TopBarActionsView(exportFile: $exportFile, fileName: $currentName)
-                        .alert("Save file", isPresented: $exportFile, actions: {
+                TopBarActionsView(exportFile: $exportFile, renameDocument: $renameDocument, fileName: $currentName)
+                    .alert("Save file", isPresented: $exportFile, actions: {
+                        
+                        TextField("File name", text: $currentName)
+                        
+                        Button("Cancel", action: {})
+                        
+                        Button {
+                            isShareSheetPresented = true
+                        } label: {
+                            Text("Export").fontWeight(.bold)
+                        }
+                    }, message: {
+                        Text("Please enter file name:")
+                    })
+                    .alert("Rename document", isPresented: $renameDocument, actions: {
+                        
+                        TextField("Document name", text: $currentName)
+                        
+                        Button("Cancel", action: {})
+                        
+                        Button {
                             
-                            TextField("File name", text: $currentName)
-                                .focused($focusedField, equals: .filename)
-                            
-                            Button("Cancel", action: {})
-                            
-                            Button {
-                                isShareSheetPresented = true
-                            } label: {
-                                Text("Export").fontWeight(.bold)
+                        } label: {
+                            Text("Rename").fontWeight(.bold)
+                        }
+                    }, message: {
+                        Text("Please enter document name:")
+                    })
+                    .transition(.opacity)
+                
+                HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
+                    .onSelectionChange { _ in }
+                    .focused($focusedField, equals: .input)
+                    .keyboardToolbar {
+                        if focusedField != .filename {
+                            HStack {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        TextFormatButtons()
+                                        symbolButton("`")
+                                        symbolButton("#")
+                                        symbolButton("!")
+                                        symbolButton("[")
+                                        symbolButton("]")
+                                        
+                                        Spacer()
+                                        
+                                    } // HSTACK
+                                    .padding(.bottom, 7)
+                                    .padding(.horizontal, 5)
+                                    
+                                }
+                                
+                                if self.focusedField != nil {
+                                    Button {
+                                        self.focusedField = nil
+                                    } label: {
+                                        Image(systemName: "keyboard.chevron.compact.down.fill")
+                                            .font(.title)
+                                    }
+                                    .padding(.horizontal, 10)
+                                }
                             }
-                        }, message: {
-                            Text("Please enter file name:")
-                        })
-                    
-                    TextEditor(text: $currentText)
-                        .focused($focusedField, equals: .input)
-                        .transition(.opacity)
-                }
+                        }
+                    }
             }
             .onAppear {
                 print("text editor visible")
@@ -100,32 +147,6 @@ struct ContentView: View {
             .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing", isHidden: $isTextFieldHidden)
             .sheet(isPresented: $isShareSheetPresented) {
                 ShareSheetView(activityItems: [saveToFile(mdStr, fileName: exportFileName)])
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    
-                    symbolButton("`")
-                    symbolButton("#")
-                    symbolButton("!")
-                    symbolButton("[")
-                    symbolButton("]")
-                    
-                    Button("**") {
-                        var str = inputController.textDocumentProxy.selectedText
-                        
-                        if let selected = str {
-                            inputController.textDocumentProxy.insertText("*\(selected)*")
-                        }
-                    }
-                    .buttonStyle(.bordered)
-                    .padding(.horizontal, 5)
-                    
-                    Spacer()
-                    
-                    Button("Done") {
-                        focusedField = nil
-                    }
-                }
             }
             .tag(2)
             

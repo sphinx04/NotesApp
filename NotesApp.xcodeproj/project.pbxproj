@@ -20,6 +20,9 @@
 		8A8CDAD429ACF03700C29448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8CDAD329ACF03700C29448 /* Assets.xcassets */; };
 		8A8CDAD729ACF03700C29448 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8CDAD629ACF03700C29448 /* Preview Assets.xcassets */; };
 		8A8EF29D29BF31660032039E /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF29C29BF31650032039E /* DocumentView.swift */; };
+		8A8EF2A329C082720032039E /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8EF2A229C082720032039E /* HighlightedTextEditor */; };
+		8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */; };
+		8A8EF2A729C1D0060032039E /* TextFormatButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */; };
 		8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE444F29AE076D00CB855C /* ExportFile.swift */; };
 		8AAE445229AE0BC500CB855C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE445129AE0BC500CB855C /* ViewExtensions.swift */; };
 		8AF4828A29B6B22A000F024B /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4828929B6B22A000F024B /* StartScreenView.swift */; };
@@ -41,6 +44,8 @@
 		8A8CDAD629ACF03700C29448 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8A8CDAE029ACF12300C29448 /* markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = markdown; sourceTree = SOURCE_ROOT; };
 		8A8EF29C29BF31650032039E /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
+		8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
+		8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormatButtons.swift; sourceTree = "<group>"; };
 		8AAE444F29AE076D00CB855C /* ExportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFile.swift; sourceTree = "<group>"; };
 		8AAE445129AE0BC500CB855C /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		8AF4828929B6B22A000F024B /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A8EF2A329C082720032039E /* HighlightedTextEditor in Frameworks */,
 				8A02F02829B63ED600BA1420 /* Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +90,8 @@
 				8A8CDACF29ACF03500C29448 /* NotesAppApp.swift */,
 				8AF4828B29B74CE7000F024B /* PDFView.swift */,
 				8A8CDAD129ACF03500C29448 /* ContentView.swift */,
+				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
+				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
 				8AF4828929B6B22A000F024B /* StartScreenView.swift */,
 				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
 				8A45703D29B2296C0057DDA0 /* TabItemViewModifier.swift */,
@@ -133,6 +141,7 @@
 			name = NotesApp;
 			packageProductDependencies = (
 				8A02F02729B63ED600BA1420 /* Markdown */,
+				8A8EF2A229C082720032039E /* HighlightedTextEditor */,
 			);
 			productName = NotesApp;
 			productReference = 8A8CDACC29ACF03500C29448 /* NotesApp.app */;
@@ -163,6 +172,7 @@
 			);
 			mainGroup = 8A8CDAC329ACF03500C29448;
 			packageReferences = (
+				8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			productRefGroup = 8A8CDACD29ACF03500C29448 /* Products */;
 			projectDirPath = "";
@@ -191,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A45703E29B2296C0057DDA0 /* TabItemViewModifier.swift in Sources */,
+				8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */,
 				8A2B736929AF9254005AA038 /* TopBarButtonModifier.swift in Sources */,
 				8AF4828C29B74CE7000F024B /* PDFView.swift in Sources */,
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
@@ -204,6 +215,7 @@
 				8A2B736729AF807B005AA038 /* ShareSheetView.swift in Sources */,
 				8A8CDAD029ACF03500C29448 /* NotesAppApp.swift in Sources */,
 				8A8EF29D29BF31660032039E /* DocumentView.swift in Sources */,
+				8A8EF2A729C1D0060032039E /* TextFormatButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +350,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,8 +378,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -405,10 +415,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kyle-n/HighlightedTextEditor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		8A02F02729B63ED600BA1420 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Markdown;
+		};
+		8A8EF2A229C082720032039E /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,6 +9,8 @@ import WebKit
     public typealias ViewRepresentable = UIViewRepresentable
 #endif
 
+public var mdWebView = MarkdownWebView()
+
 public struct Markdown: ViewRepresentable {
     
     @Binding var content: String
@@ -16,7 +18,6 @@ public struct Markdown: ViewRepresentable {
     @Environment(\.markdownStyle) private var style: MarkdownStyle
     var textDidChanged: ((String) -> Void)?
     var theme: ColorScheme?
-    var webView: MarkdownWebView?
 
     public init(content: Binding<String>) {
         self._content = content
@@ -32,6 +33,8 @@ public struct Markdown: ViewRepresentable {
     }
     private func getWebView(context: Context) -> MarkdownWebView {
         let codeView = MarkdownWebView()
+        mdWebView = codeView
+        
         codeView.setContent(content)
         if (style.padding != nil) {
             codeView.setPadding(style.padding!)
@@ -65,6 +68,7 @@ public struct Markdown: ViewRepresentable {
         if context.coordinator.content != content {
             webview.setContent(content)
         }
+        
     }
     // MARK: macOS
     public func makeNSView(context: Context) -> MarkdownWebView {

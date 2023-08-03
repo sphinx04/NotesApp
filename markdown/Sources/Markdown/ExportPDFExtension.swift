@@ -9,20 +9,15 @@ import UIKit
 import WebKit
 import PDFKit
 
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
 public extension WKWebView {
 
-    /// Exports a PDF document with this web view current contents.
-    /// Only call this function when the web view has **finished** loading.
-    func exportAsPDF() -> PDFDocument? {
-        guard self.isLoading == false else {
-            print("WKWebView still loading!")
-            return nil
-        }
-        let pdfData = createPDFData()
-        return PDFDocument(data: pdfData)
-    }
-
-    private func createPDFData() -> Data {
+    func createPDFData(rect: CGRect) -> Data {
         let oldBounds = self.bounds
 
         var printBounds = self.bounds
@@ -34,8 +29,8 @@ public extension WKWebView {
 
         let printRenderer = UIPrintPageRenderer()
         printRenderer.addPrintFormatter(self.viewPrintFormatter(), startingAtPageAt: 0)
-        printRenderer.setValue(NSValue(cgRect: UIScreen.main.bounds), forKey: "paperRect")
-        printRenderer.setValue(NSValue(cgRect: printableRect), forKey: "printableRect")
+        printRenderer.setValue(NSValue(cgRect: rect), forKey: "paperRect")
+        printRenderer.setValue(NSValue(cgRect: rect), forKey: "printableRect")
 
         self.bounds = oldBounds
         return printRenderer.generatePDFData()

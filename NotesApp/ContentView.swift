@@ -16,6 +16,7 @@ let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [
 
 struct ContentView: View {
     
+    //@ObservedObject var dataModel = DataStorageModel()
     @State var dataModel = DataStorageModel()
     @State var currentName: String = "name"
     @State var currentText: String = "text"
@@ -41,7 +42,7 @@ struct ContentView: View {
     
     func symbolButton(_ symbol: String) -> some View {
         Button(symbol) {
-            var inputController = UIInputViewController()
+            let inputController = UIInputViewController()
             inputController.textDocumentProxy.insertText(symbol)
         }
         .buttonStyle(.bordered)
@@ -134,7 +135,7 @@ struct ContentView: View {
             }
             .onAppear {
                 print("text editor visible")
-                dataModel = DataStorageModel()
+                //dataModel = DataStorageModel()
                 currentName = dataModel.getCurrentName()
                 currentText = dataModel.getCurrentText()
             }
@@ -153,11 +154,12 @@ struct ContentView: View {
             
             VStack {
                 if !isPreviewHidden {
-                    currentView
-                    
-//                    PDFViewDisplay {
-//                        currentView
-//                    }
+                    GeometryReader { proxy in
+                        VStack {
+                            currentView
+                            ShareLink("Export PDF", item: saveToPDF(mdWebView.webview, rect: CGRect(x: 0, y: 0, width: 1000, height: 2000)))
+                        }
+                    }
                 }
             }
             .tabItemViewModifier(label: "Preview", systemImage: "doc.richtext", isHidden: $isPreviewHidden)

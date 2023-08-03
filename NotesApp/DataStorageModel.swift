@@ -8,9 +8,18 @@
 import Foundation
 import SwiftUI
 
+//class DataStorageModel: ObservableObject {
 struct DataStorageModel {
     @AppStorage("documents") var savedDocuments: [Document] = [Document(name: "test", text: "# Welcome test")]
     @AppStorage("currentDocumentNumber") var currentDocumentNumber: Int = 0
+    
+//    @Published var savedDocuments = [Document]()
+//    @Published var currentDocumentNumber: Int = 0
+//
+//    init() {
+//        self.savedDocuments = savedDocumentsStorage
+//        self.currentDocumentNumber = currentDocumentNumberStorage
+//    }
     
     func getDocumentsArray() -> [Document] {
         savedDocuments

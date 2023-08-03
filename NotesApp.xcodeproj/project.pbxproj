@@ -26,7 +26,6 @@
 		8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE444F29AE076D00CB855C /* ExportFile.swift */; };
 		8AAE445229AE0BC500CB855C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE445129AE0BC500CB855C /* ViewExtensions.swift */; };
 		8AF4828A29B6B22A000F024B /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4828929B6B22A000F024B /* StartScreenView.swift */; };
-		8AF4828C29B74CE7000F024B /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4828B29B74CE7000F024B /* PDFView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +48,6 @@
 		8AAE444F29AE076D00CB855C /* ExportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFile.swift; sourceTree = "<group>"; };
 		8AAE445129AE0BC500CB855C /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		8AF4828929B6B22A000F024B /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
-		8AF4828B29B74CE7000F024B /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +86,6 @@
 				8A2B736629AF807B005AA038 /* ShareSheetView.swift */,
 				8A2B736429AF607E005AA038 /* TopBarActionsView.swift */,
 				8A8CDACF29ACF03500C29448 /* NotesAppApp.swift */,
-				8AF4828B29B74CE7000F024B /* PDFView.swift */,
 				8A8CDAD129ACF03500C29448 /* ContentView.swift */,
 				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
 				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
@@ -203,7 +200,6 @@
 				8A45703E29B2296C0057DDA0 /* TabItemViewModifier.swift in Sources */,
 				8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */,
 				8A2B736929AF9254005AA038 /* TopBarButtonModifier.swift in Sources */,
-				8AF4828C29B74CE7000F024B /* PDFView.swift in Sources */,
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
 				8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */,

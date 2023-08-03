@@ -31,7 +31,7 @@ struct SavedDocumentsView: View {
     
     @State var columnCount: Int = 3
     @Binding var tabSelection: Int
-    @State var dataModel = DataStorageModel()
+    @ObservedObject var dataModel = DataStorageModel()
     @State var isSettingsPresented = false
     @State var itemsCount: Int = 0
     
@@ -72,7 +72,7 @@ struct SavedDocumentsView: View {
                     let newDocument = createDocument()
                     dataModel.addDocument(newDocument)
                     dataModel.setCurrentDocument(newDocument)
-                    dataModel = DataStorageModel()
+                    // dataModel = DataStorageModel()
                     itemsCount = dataModel.savedDocuments.count
                     tabSelection = 2
                     
@@ -86,10 +86,12 @@ struct SavedDocumentsView: View {
             .background(.thickMaterial)
             .zIndex(20)//HSTACK
             
+            
+            
                 ScrollView {
                     VStack {
                         LazyVGrid(columns: getColumnsArray(), alignment: .leading) {
-                            ForEach(dataModel.getDocumentsArray()) { document in
+                            ForEach(dataModel.savedDocuments) { document in
                                 DocumentView(document, fontSizeMultiplyer: 1/Double(columnCount))
                                     .onTapGesture {
                                         dataModel.setCurrentDocument(document)
@@ -98,14 +100,16 @@ struct SavedDocumentsView: View {
                                     .contextMenu {
                                         Button {
                                             dataModel.addDocument(Document(name: document.name, text: document.text))
-                                            dataModel = DataStorageModel()
+                                            // dataModel = DataStorageModel()
                                             itemsCount = dataModel.savedDocuments.count
                                         } label: {
                                             Label("Duplicate", systemImage: "doc.on.doc")
                                         }
                                         Button(role: .destructive) {
-                                            dataModel.removeDocument(document)
-                                            dataModel = DataStorageModel()
+                                            withAnimation(.linear(duration: 0.3).delay(0.5)) {
+                                                dataModel.removeDocument(document)
+                                            }
+                                            // dataModel = DataStorageModel()
                                             itemsCount = dataModel.savedDocuments.count
                                             
                                         } label: {
@@ -113,7 +117,7 @@ struct SavedDocumentsView: View {
                                         }
                                     }
                             }
-                        } // LAZYVGRID
+                        }  // LAZYVGRID
                         .padding()
                         .animation(.easeInOut, value: columnCount)
                     Spacer()

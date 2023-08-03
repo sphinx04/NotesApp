@@ -16,8 +16,7 @@ let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [
 
 struct ContentView: View {
     
-    //@ObservedObject var dataModel = DataStorageModel()
-    @State var dataModel = DataStorageModel()
+    @ObservedObject var dataModel = DataStorageModel()
     @State var currentName: String = "name"
     @State var currentText: String = "text"
     
@@ -57,7 +56,7 @@ struct ContentView: View {
             
             VStack(spacing: 0) {
                 if !isDocumentsHidden {
-                    SavedDocumentsView(tabSelection: $tabSelection)
+                    SavedDocumentsView(tabSelection: $tabSelection, dataModel: dataModel)
                         .transition(.opacity)
                 }
             }
@@ -135,7 +134,8 @@ struct ContentView: View {
             }
             .onAppear {
                 print("text editor visible")
-                //dataModel = DataStorageModel()
+                // dataModel = DataStorageModel()
+                dataModel.refreshStorage()
                 currentName = dataModel.getCurrentName()
                 currentText = dataModel.getCurrentText()
             }

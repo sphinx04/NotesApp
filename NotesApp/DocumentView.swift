@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct DocumentView: View {
-    
     var document: Document
     var fontSizeMultiplyer: Double
-    
-    
-    init(_ document: Document, fontSizeMultiplyer: Double) {
+    var duplicateAction: () -> Void
+    var deleteAction: () -> Void
+
+    init(_ document: Document,
+         fontSizeMultiplyer: Double,
+         duplicateAction: @escaping () -> Void,
+         deleteAction: @escaping () -> Void) {
         self.document = document
         self.fontSizeMultiplyer = fontSizeMultiplyer
+        self.duplicateAction = duplicateAction
+        self.deleteAction = deleteAction
     }
-    
+
     func getDateString(from date: Date) -> String {
         let calendar = Calendar(identifier: .gregorian)
         var dateString = ""
@@ -25,37 +30,50 @@ struct DocumentView: View {
             dateString = "Today"
         } else if calendar.isDateInYesterday(date) {
             dateString = "Yesterday"
-        }
-        else {
+        } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEEE, MMM d"
             dateString = dateFormatter.string(from: date)
         }
         return dateString
     }
-    
+
     var body: some View {
-        
         VStack {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
                     .foregroundColor(.white)
-                    .shadow(radius: 5)
-                
+                RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
+                    .strokeBorder(.black, lineWidth: 0.2)
+                    .foregroundColor(.white)
+
                 Text(document.text)
                     .padding(30 * fontSizeMultiplyer)
                     .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
                     .foregroundColor(.black)
                     .zIndex(80)
             }
+            .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))
+            .contextMenu {
+                Button {
+                    duplicateAction()
+                } label: {
+                    Label("Duplicate", systemImage: "doc.on.doc")
+                }
+                Button(role: .destructive) {
+                    deleteAction()
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
             .aspectRatio(3/4, contentMode: .fit)
             .padding([.top, .leading, .trailing])
-            
+
             Text(document.name)
                 .font(.system(size: 14))
                 .multilineTextAlignment(.center)
                 .lineLimit(1)
-            
+
             Text(getDateString(from: document.lastModified))
                 .font(.system(size: 10))
                 .multilineTextAlignment(.center)

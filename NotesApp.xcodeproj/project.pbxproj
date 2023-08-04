@@ -29,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D4EA90124D829D651BB4F41 /* libPods-NotesApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotesApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A02F02529B61AE400BA1420 /* DataStorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageModel.swift; sourceTree = "<group>"; };
 		8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileButtonView.swift; sourceTree = "<group>"; };
 		8A2B736429AF607E005AA038 /* TopBarActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarActionsView.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 		8A8CDAE129ACF1DC00C29448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D4EA90124D829D651BB4F41 /* libPods-NotesApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,6 +132,7 @@
 				8A8CDAC829ACF03500C29448 /* Sources */,
 				8A8CDAC929ACF03500C29448 /* Frameworks */,
 				8A8CDACA29ACF03500C29448 /* Resources */,
+				6346BB972A7C420C00728621 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -191,6 +194,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6346BB972A7C420C00728621 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A8CDAC829ACF03500C29448 /* Sources */ = {
@@ -346,6 +371,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -374,6 +400,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

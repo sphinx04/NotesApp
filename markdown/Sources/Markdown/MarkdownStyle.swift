@@ -22,7 +22,11 @@ public struct MarkdownStyle: Hashable {
         self.paddingLeft = paddingLeft
         self.paddingRight = paddingRight
     }
-    public init(padding: Int = 18, paddingTop: Int = 18, paddingBottom: Int = 18, paddingLeft: Int = 18, paddingRight: Int = 18) {
+    public init(padding: Int = 18,
+                paddingTop: Int = 18,
+                paddingBottom: Int = 18,
+                paddingLeft: Int = 18,
+                paddingRight: Int = 18) {
         self.padding = padding
         self.paddingTop = paddingTop
         self.paddingBottom = paddingBottom

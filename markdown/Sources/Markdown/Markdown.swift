@@ -12,7 +12,7 @@ import WebKit
 public var mdWebView = MarkdownWebView()
 
 public struct Markdown: ViewRepresentable {
-    
+
     @Binding var content: String
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.markdownStyle) private var style: MarkdownStyle
@@ -27,54 +27,54 @@ public struct Markdown: ViewRepresentable {
         self._content = content
         self.theme = theme
     }
-    
+
     public func makeCoordinator() -> Coordinator {
         return Coordinator(content: $content, colorScheme: colorScheme)
     }
     private func getWebView(context: Context) -> MarkdownWebView {
         let codeView = MarkdownWebView()
         mdWebView = codeView
-        
+
         codeView.setContent(content)
-        if (style.padding != nil) {
+        if style.padding != nil {
             codeView.setPadding(style.padding!)
         }
-        if (style.paddingTop != nil) {
+        if style.paddingTop != nil {
             codeView.setPaddingTop(style.paddingTop!)
         }
-        if (style.paddingBottom != nil) {
+        if style.paddingBottom != nil {
             codeView.setPaddingBottom(style.paddingBottom!)
         }
-        if (style.paddingLeft != nil) {
+        if style.paddingLeft != nil {
             codeView.setPaddingLeft(style.paddingLeft!)
         }
-        if (style.paddingRight != nil) {
+        if style.paddingRight != nil {
             codeView.setPaddingRight(style.paddingRight!)
         }
         codeView.textDidChanged = { text in
             context.coordinator.set(content: text)
         }
-        colorScheme == .dark ? codeView.setTheme(.dark) : codeView.setTheme(.light)
+        // colorScheme == .dark ? codeView.setTheme(.dark) : codeView.setTheme(.light)
+        codeView.setTheme(colorScheme)
         return codeView
     }
-    
-    
-    
+
     private func updateView(_ webview: MarkdownWebView, context: Context) {
         if context.coordinator.colorScheme != colorScheme {
-            colorScheme == .dark ? webview.setTheme(.dark) : webview.setTheme(.light)
+            // colorScheme == .dark ? webview.setTheme(.dark) : webview.setTheme(.light)
+            webview.setTheme(colorScheme)
             context.coordinator.set(colorScheme: colorScheme)
         }
         if context.coordinator.content != content {
             webview.setContent(content)
         }
-        
+
     }
     // MARK: macOS
     public func makeNSView(context: Context) -> MarkdownWebView {
         return getWebView(context: context)
     }
-    
+
     public func updateNSView(_ webview: MarkdownWebView, context: Context) {
         updateView(webview, context: context)
     }
@@ -82,7 +82,7 @@ public struct Markdown: ViewRepresentable {
     public func makeUIView(context: Context) -> MarkdownWebView {
         getWebView(context: context)
     }
-    
+
     public func updateUIView(_ webview: MarkdownWebView, context: Context) {
         updateView(webview, context: context)
     }
@@ -98,18 +98,18 @@ public extension Markdown {
     class Coordinator: NSObject {
         @Binding private(set) var content: String
         private(set) var colorScheme: ColorScheme
-        
+
         init(content: Binding<String>, colorScheme: ColorScheme) {
             _content = content
             self.colorScheme = colorScheme
         }
-        
+
         func set(content: String) {
             if self.content != content {
                 self.content = content
             }
         }
-        
+
         func set(colorScheme: ColorScheme) {
             if self.colorScheme != colorScheme {
                 self.colorScheme = colorScheme
@@ -132,10 +132,10 @@ private struct MarkdownStyleKey: EnvironmentKey {
 }
 
 #if DEBUG
-struct Markdown_Previews : PreviewProvider {
+struct Markdown_Previews: PreviewProvider {
     static private var jsonString = """
     ## Hello World
-    
+
     Markdown Preview.
     """
     static var previews: some View {

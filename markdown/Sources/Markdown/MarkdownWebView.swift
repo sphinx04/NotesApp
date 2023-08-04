@@ -15,14 +15,13 @@ import WebKit
     public typealias CustomView = UIView
 #endif
 
-
 // JS Func
 typealias JavascriptCallback = (Result<Any?, Error>) -> Void
 private struct JavascriptFunction {
-    
+
     let functionString: String
     let callback: JavascriptCallback?
-    
+
     init(functionString: String, callback: JavascriptCallback? = nil) {
         self.functionString = functionString
         self.callback = callback
@@ -45,47 +44,46 @@ public class MarkdownWebView: CustomView, WKNavigationDelegate {
         configuration.userContentController = userController
         let webView = WKWebView(frame: bounds, configuration: configuration)
         webView.navigationDelegate = self
-        
-        #if os(OSX)
+
+#if os(OSX)
         webView.setValue(true, forKey: "drawsTransparentBackground") // Prevent white flick
-        #elseif os(iOS)
+#elseif os(iOS)
         webView.isOpaque = false
-        #endif
-        
+#endif
+
         return webView
     }()
-    
+
     var textDidChanged: ((String) -> Void)?
-    
+
     private var pageLoaded = false
     private var currentContent: String = ""
     private var pendingFunctions = [JavascriptFunction]()
-    
-    
+
     override init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
         initWebView()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initWebView()
     }
-    
+
     func isViewLoaded() -> Bool {
         pageLoaded
     }
-    
+
     func getWebView() -> WKWebView {
         return webview
     }
-    
+
     func setContent(_ value: String) {
-        
+
         guard currentContent != value else {
             return
         }
-        
+
         currentContent = value
         //
         // It's tricky to pass FULL JSON or HTML text with \n or "", ... into JS Bridge
@@ -98,12 +96,12 @@ public class MarkdownWebView: CustomView, WKNavigationDelegate {
         \(value)
         """.replacingOccurrences(of: "`", with: "\\`", options: .literal, range: nil)
             .replacingOccurrences(of: "{", with: "\\{", options: .literal, range: nil)
-        
+
         let end = "`; markdownPreview(content.replace(/\\\\`/g, '`').replace(/\\\\{/g, '{'));"
 
         let script = first + content + end
         callJavascript(javascriptString: script)
-        
+
     }
     func setTheme(_ theme: ColorScheme) {
         if theme == .dark {
@@ -130,7 +128,9 @@ public class MarkdownWebView: CustomView, WKNavigationDelegate {
         callJavascript(javascriptString: "__markdown_preview__.style.paddingRight = '\(right)px';")
     }
     ///  open links in browsers
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    public func webView(_ webView: WKWebView,
+                        decidePolicyFor navigationAction: WKNavigationAction,
+                        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
             if url.isFileURL == false {
                 openURL(url)
@@ -141,11 +141,13 @@ public class MarkdownWebView: CustomView, WKNavigationDelegate {
         decisionHandler(.allow)
     }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        /// Disable right-click menu
-        webView.evaluateJavaScript("document.body.setAttribute('oncontextmenu', 'event.preventDefault();');", completionHandler: nil);
+        // Disable right-click menu
+        // swiftlint: disable line_length
+        webView.evaluateJavaScript("document.body.setAttribute('oncontextmenu', 'event.preventDefault();');", completionHandler: nil)
+
+        // swiftlint: enable line_length
     }
 }
-
 
 extension MarkdownWebView {
     private func initWebView() {
@@ -155,14 +157,14 @@ extension MarkdownWebView {
         webview.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         webview.topAnchor.constraint(equalTo: topAnchor).isActive = true
         webview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
         guard let bundlePath = Bundle.module.path(forResource: "web", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath),
             let indexPath = bundle.path(forResource: "index", ofType: "html") else {
                 fatalError("Ace editor is missing")
         }
-        
+        // swiftlint:disable force_try
         let data = try! Data(contentsOf: URL(fileURLWithPath: indexPath))
+        // swiftlint:enable force_try
         webview.load(data, mimeType: "text/html", characterEncodingName: "utf-8", baseURL: bundle.resourceURL!)
     }
     private func addFunction(function: JavascriptFunction) {
@@ -172,8 +174,7 @@ extension MarkdownWebView {
         webview.evaluateJavaScript(function.functionString) { (response, error) in
             if let error = error {
                 function.callback?(.failure(error))
-            }
-            else {
+            } else {
                 function.callback?(.success(response))
             }
         }
@@ -187,19 +188,18 @@ extension MarkdownWebView {
     private func callJavascript(javascriptString: String, callback: JavascriptCallback? = nil) {
         if pageLoaded {
             callJavascriptFunction(function: JavascriptFunction(functionString: javascriptString, callback: callback))
-        }
-        else {
+        } else {
             addFunction(function: JavascriptFunction(functionString: javascriptString, callback: callback))
         }
     }
 }
 
-
 // MARK: WKScriptMessageHandler
 
 extension MarkdownWebView: WKScriptMessageHandler {
 
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController,
+                                      didReceive message: WKScriptMessage) {
 
         // is Ready
         if message.name == Constants.mdPreviewDidReady {
@@ -207,11 +207,11 @@ extension MarkdownWebView: WKScriptMessageHandler {
             callPendingFunctions()
             return
         }
-        
+
         // is Text change
         if message.name == Constants.mdPreviewDidChanged,
            let text = message.body as? String {
-            
+
             self.textDidChanged?(text)
 
             return

@@ -9,7 +9,6 @@ import UIKit
 import WebKit
 import PDFKit
 
-
 func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
@@ -42,7 +41,7 @@ extension UIPrintPageRenderer {
     func generatePDFData() -> Data {
         let pdfData = NSMutableData()
         UIGraphicsBeginPDFContextToData(pdfData, self.paperRect, nil)
-        self.prepare(forDrawingPages: NSMakeRange(0, self.numberOfPages))
+        self.prepare(forDrawingPages: NSRange(location: 0, length: self.numberOfPages))
         let printRect = UIGraphicsGetPDFContextBounds()
 
         for pdfPage in 0..<self.numberOfPages {

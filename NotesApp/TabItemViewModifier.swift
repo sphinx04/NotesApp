@@ -11,7 +11,7 @@ struct TabItemViewModifier: ViewModifier {
     var label: String
     var systemImage: String
     @Binding var isHidden: Bool
-    
+
     func body(content: Content) -> some View {
         content
             .tabItem {

@@ -13,7 +13,6 @@ func saveToFile(_ str: String, fileName: String) -> URL {
 
     do {
         try str.write(to: url, atomically: true, encoding: .utf8)
-        let input = try String(contentsOf: url)
     } catch {
         print(error.localizedDescription)
     }
@@ -22,18 +21,14 @@ func saveToFile(_ str: String, fileName: String) -> URL {
 
 @MainActor func saveToPDF(_ webView: WKWebView, rect: CGRect) -> URL {
     let pdfData = webView.createPDFData(rect: rect)
-    
     let url = getDocumentsDirectory().appendingPathComponent("output.pdf")
-    
     do {
         try pdfData.write(to: url)
     } catch {
         print(error.localizedDescription)
     }
-    
     return url
 }
-
 
 func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

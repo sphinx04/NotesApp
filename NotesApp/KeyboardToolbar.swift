@@ -12,11 +12,11 @@ struct KeyboardToolbar<ToolbarView: View>: ViewModifier {
     @State var  height: CGFloat = 0
     private let toolbarView: ToolbarView
     @State var showContent = false
-    
+
     init(@ViewBuilder toolbar: () -> ToolbarView) {
         self.toolbarView = toolbar()
     }
-    
+
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
             VStack {
@@ -37,13 +37,13 @@ struct KeyboardToolbar<ToolbarView: View>: ViewModifier {
                     )
             }
         }
-        
+
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 extension View {
-    func keyboardToolbar<ToolbarView>(@ViewBuilder view:  @escaping  () -> ToolbarView) -> some View where ToolbarView: View {
+    func keyboardToolbar<T>(@ViewBuilder view: @escaping () -> T) -> some View where T: View {
         modifier(KeyboardToolbar(toolbar: view))
     }
 }

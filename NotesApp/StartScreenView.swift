@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct StartScreenView: View {
-    
+
     var textColor = Color(red: 0.4, green: 0.4, blue: 0.4)
     @State var isStatic: Bool = true
     @State var isActive: Bool = false
-    
+
     var body: some View {
             VStack {
                 if !isActive {
@@ -24,19 +24,19 @@ struct StartScreenView: View {
                             .frame(width: 256, height: 256)
                             .shadow(radius: isStatic ? 0 : 20)
                         VStack {
-                            
+
                             HStack(spacing: 10) {
                                 RoundedRectangle(cornerRadius: isStatic ? 5 : 10)
                                     .frame(width: isStatic ? 80 : 100, height: isStatic ? 10 : 20)
                                     .shadow(radius: isStatic ? 0 : 6)
                                     .foregroundColor(textColor)
-                                
+
                                 RoundedRectangle(cornerRadius: 5)
                                     .frame(width: isStatic ? 90 : 70, height: 10)
                                     .foregroundColor(.white)
                             }
                             .padding(.top, 25)
-                            
+
                             HStack(spacing: 10) {
                                 RoundedRectangle(cornerRadius: 5)
                                     .frame(width: 50, height: 10)
@@ -46,7 +46,7 @@ struct StartScreenView: View {
                                     .foregroundColor(isStatic ? textColor : Color(red: 0.7, green: 0, blue: 0))
                             }
                             .shadow(radius: isStatic ? 0 : 6)
-                            
+
                             HStack(spacing: 10) {
                                 RoundedRectangle(cornerRadius: 5)
                                     .frame(width: 30, height: 10)
@@ -61,7 +61,7 @@ struct StartScreenView: View {
                             }
                             .foregroundColor(textColor)
                             .shadow(radius: isStatic ? 0 : 6)
-                            
+
                             ZStack {
                                 RoundedRectangle(cornerRadius: isStatic ? 5 : 20)
                                     .frame(width: isStatic ? 180 : 100, height: isStatic ? 10 : 80)
@@ -73,8 +73,7 @@ struct StartScreenView: View {
                             }
                             .foregroundColor(isStatic ? textColor : Color(red: 0, green: 0, blue: 0.7))
                             .shadow(radius: isStatic ? 0 : 6)
-                            
-                            
+
                             HStack(spacing: isStatic ? 10 : 5) {
                                 RoundedRectangle(cornerRadius: 5)
                                     .frame(width: 35, height: 10)
@@ -89,7 +88,7 @@ struct StartScreenView: View {
                             }
                             .shadow(radius: isStatic ? 0 : 6)
                             .foregroundColor(textColor)
-                            
+
                             VStack {
                                 HStack(spacing: isStatic ? 10 : 5) {
                                     RoundedRectangle(cornerRadius: isStatic ? 5 : 3)
@@ -119,90 +118,88 @@ struct StartScreenView: View {
                                     .foregroundColor(.orange)
                             }
                             .shadow(radius: isStatic ? 0 : 6)
-                            
+
                             VStack(spacing: isStatic ? 8 : -10) {
                                 HStack(spacing: 10) {
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 30, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 60, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
-                                    
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 20, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
                                 }
-                                
+
                                 HStack(spacing: 10) {
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
-                                    
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 20, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 30, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 60, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
                                 }
-                                
+
                                 HStack(spacing: 10) {
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 30, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 60, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 70, height: 10)
                                 }
-                                
+
                                 HStack(spacing: 10) {
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 60, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 20, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 30, height: 10)
                                 }
-                                
+
                                 HStack(spacing: 10) {
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 30, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 20, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 60, height: 10)
-                                    
+
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(width: 15, height: 10)
                                 }
-                                
+
                             }
                             .foregroundColor(isStatic ? textColor : .white)
                         }
@@ -218,17 +215,17 @@ struct StartScreenView: View {
                     ContentView()
                 }
             }
-            .onAppear() {
+            .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         isStatic = false
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    withAnimation() {
+                    withAnimation {
                         isActive = true
                     }
                 }
         }
-        
+
     }
 }
 

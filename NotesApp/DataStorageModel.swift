@@ -14,6 +14,13 @@ class DataStorageModel: ObservableObject {
 
     @Published var savedDocuments = [Document]()
     @Published var currentDocumentNumber: Int = 0
+    @Published var exportFile = false
+    @Published var renameDocument = false
+    @Published var currentName: String = "name"
+    @Published var isDocumentsHidden: Bool = true
+    @Published var isTextFieldHidden: Bool = true
+    @Published var isPreviewHidden: Bool = true
+    @Published var isShareSheetPresented = false
 
     init() {
         self.savedDocuments = savedDocumentsStorage

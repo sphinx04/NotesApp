@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
+		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
+		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
 		8A02F02629B61AE400BA1420 /* DataStorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F02529B61AE400BA1420 /* DataStorageModel.swift */; };
 		8A02F02829B63ED600BA1420 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 8A02F02729B63ED600BA1420 /* Markdown */; };
 		8A2B736329AF5F9F005AA038 /* ExportFileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */; };
@@ -30,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		3D4EA90124D829D651BB4F41 /* libPods-NotesApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotesApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
+		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
+		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		8A02F02529B61AE400BA1420 /* DataStorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageModel.swift; sourceTree = "<group>"; };
 		8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileButtonView.swift; sourceTree = "<group>"; };
 		8A2B736429AF607E005AA038 /* TopBarActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarActionsView.swift; sourceTree = "<group>"; };
@@ -64,6 +70,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63D6773A2A82F540006F9EC4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63D6773B2A82F56D006F9EC4 /* View Screens */,
+				8A2B736629AF807B005AA038 /* ShareSheetView.swift */,
+				8A2B736429AF607E005AA038 /* TopBarActionsView.swift */,
+				8AF4828929B6B22A000F024B /* StartScreenView.swift */,
+				8A2B736A29AFD372005AA038 /* SavedDocumentsView.swift */,
+				8A8EF29C29BF31650032039E /* DocumentView.swift */,
+				8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		63D6773B2A82F56D006F9EC4 /* View Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8A8CDAD129ACF03500C29448 /* ContentView.swift */,
+				63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */,
+				63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */,
+				63D677402A82F5BB006F9EC4 /* PreviewView.swift */,
+			);
+			path = "View Screens";
+			sourceTree = "<group>";
+		};
 		8A8CDAC329ACF03500C29448 = {
 			isa = PBXGroup;
 			children = (
@@ -84,18 +115,12 @@
 		8A8CDACE29ACF03500C29448 /* NotesApp */ = {
 			isa = PBXGroup;
 			children = (
-				8A2B736629AF807B005AA038 /* ShareSheetView.swift */,
-				8A2B736429AF607E005AA038 /* TopBarActionsView.swift */,
+				63D6773A2A82F540006F9EC4 /* Views */,
 				8A8CDACF29ACF03500C29448 /* NotesAppApp.swift */,
-				8A8CDAD129ACF03500C29448 /* ContentView.swift */,
 				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
 				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
-				8AF4828929B6B22A000F024B /* StartScreenView.swift */,
 				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
 				8A45703D29B2296C0057DDA0 /* TabItemViewModifier.swift */,
-				8A2B736A29AFD372005AA038 /* SavedDocumentsView.swift */,
-				8A8EF29C29BF31650032039E /* DocumentView.swift */,
-				8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */,
 				8A2B736829AF9254005AA038 /* TopBarButtonModifier.swift */,
 				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
 				8AAE445129AE0BC500CB855C /* ViewExtensions.swift */,
@@ -132,7 +157,6 @@
 				8A8CDAC829ACF03500C29448 /* Sources */,
 				8A8CDAC929ACF03500C29448 /* Frameworks */,
 				8A8CDACA29ACF03500C29448 /* Resources */,
-				6346BB972A7C420C00728621 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -155,7 +179,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					8A8CDACB29ACF03500C29448 = {
 						CreatedOnToolsVersion = 14.2;
@@ -195,28 +219,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		6346BB972A7C420C00728621 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8A8CDAC829ACF03500C29448 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -226,11 +228,14 @@
 				8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */,
 				8A2B736929AF9254005AA038 /* TopBarButtonModifier.swift in Sources */,
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
+				63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
+				63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */,
 				8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */,
 				8A02F02629B61AE400BA1420 /* DataStorageModel.swift in Sources */,
 				8AAE445229AE0BC500CB855C /* ViewExtensions.swift in Sources */,
 				8A2B736329AF5F9F005AA038 /* ExportFileButtonView.swift in Sources */,
+				63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */,
 				8A2B736529AF607E005AA038 /* TopBarActionsView.swift in Sources */,
 				8AF4828A29B6B22A000F024B /* StartScreenView.swift in Sources */,
 				8A2B736729AF807B005AA038 /* ShareSheetView.swift in Sources */,
@@ -279,6 +284,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -339,6 +345,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

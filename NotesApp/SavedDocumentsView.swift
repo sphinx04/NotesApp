@@ -88,10 +88,10 @@ struct SavedDocumentsView: View {
                         LazyVGrid(columns: getColumnsArray(), alignment: .leading) {
                             ForEach(dataModel.savedDocuments) { document in
                                 DocumentView(document, fontSizeMultiplyer: 1/Double(columnCount)) {
-                                        dataModel.addDocument(Document(name: document.name, text: document.text))
-                                        itemsCount = dataModel.savedDocuments.count
+                                    dataModel.addDocument(Document(name: document.name, text: document.text))
+                                    itemsCount = dataModel.savedDocuments.count
                                 } deleteAction: {
-                                    withAnimation(.linear(duration: 0.3).delay(0.5)) {
+                                    withAnimation(.linear(duration: 0.2).delay(1)) {
                                         dataModel.removeDocument(document)
                                     }
                                     itemsCount = dataModel.savedDocuments.count

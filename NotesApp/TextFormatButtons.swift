@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextFormatButtons: View {
-
+    
     var inputController = UIInputViewController()
     @State var addImage: Bool = false
     @State var addLink: Bool = false
@@ -16,16 +16,15 @@ struct TextFormatButtons: View {
     @State var linkPlaceholder: String = ""
     @State var imageURL: String = ""
     @State var linkURL: String = ""
-
+    
     var body: some View {
         HStack {
-
             Menu {
                 Button {
                     imagePlaceholder = ""
                     imageURL = ""
                     addImage = true
-
+                    
                 } label: {
                     Text("Add image")
                     Image(systemName: "photo")
@@ -33,7 +32,7 @@ struct TextFormatButtons: View {
                 }
                 .buttonStyle(.bordered)
                 .padding(.horizontal, 5)
-
+                
                 Button {
                     linkPlaceholder = ""
                     linkURL = ""
@@ -51,10 +50,10 @@ struct TextFormatButtons: View {
             }
             .buttonStyle(.bordered)
             .padding(.horizontal, 5)
-
+            
             Button {
                 let str = inputController.textDocumentProxy.selectedText
-
+                
                 if let selected = str {
                     inputController.textDocumentProxy.insertText("**\(selected)**")
                 }
@@ -64,10 +63,10 @@ struct TextFormatButtons: View {
             }
             .buttonStyle(.bordered)
             .padding(.horizontal, 5)
-
+            
             Button {
                 let str = inputController.textDocumentProxy.selectedText
-
+                
                 if let selected = str {
                     inputController.textDocumentProxy.insertText("*\(selected)*")
                 }
@@ -77,17 +76,17 @@ struct TextFormatButtons: View {
             }
             .buttonStyle(.bordered)
             .padding(.horizontal, 5)
-
+            
         }
         .alert("Add link", isPresented: $addLink, actions: {
             TextField("Placeholder", text: $linkPlaceholder)
             TextField("URL", text: $linkURL)
-
+            
             Button("Cancel", action: {})
-
+            
             Button {
                 inputController.textDocumentProxy.insertText("[\(linkPlaceholder)](\(linkURL))")
-
+                
             } label: {
                 Text("Add").fontWeight(.bold)
             }
@@ -95,16 +94,16 @@ struct TextFormatButtons: View {
             Text("Please enter placeholder and URL:")
         })
         .alert("Add image", isPresented: $addImage, actions: {
-
+            
             TextField("Placeholder", text: $imagePlaceholder)
             TextField("URL", text: $imageURL)
-
+            
             Button("Cancel", action: {})
-
+            
             Button {
                 inputController.textDocumentProxy.insertText("")
                 inputController.textDocumentProxy.insertText("![\(imagePlaceholder)](\(imageURL))")
-
+                
             } label: {
                 Text("Add").fontWeight(.bold)
             }

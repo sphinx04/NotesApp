@@ -26,10 +26,20 @@ public extension WKWebView {
         var printableRect = printBounds
         printableRect.origin = .zero
 
+        let contectWidth = Int(rect.width * 0.9)
+        let contectHeight = Int(rect.height * 0.9)
+        let contentX = (Int(rect.width) - contectWidth) / 2
+        let contentY = (Int(rect.height) - contectHeight) / 2
+
+        let contentRect = CGRect(x: contentX,
+                           y: contentY,
+                           width: contectWidth,
+                           height: contectHeight)
+
         let printRenderer = UIPrintPageRenderer()
         printRenderer.addPrintFormatter(self.viewPrintFormatter(), startingAtPageAt: 0)
         printRenderer.setValue(NSValue(cgRect: rect), forKey: "paperRect")
-        printRenderer.setValue(NSValue(cgRect: rect), forKey: "printableRect")
+        printRenderer.setValue(NSValue(cgRect: contentRect), forKey: "printableRect")
 
         self.bounds = oldBounds
         return printRenderer.generatePDFData()

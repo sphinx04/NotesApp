@@ -149,8 +149,8 @@ struct ContentView: View {
                                       item: saveToPDF(mdWebView.webview,
                                                       rect: CGRect(x: 0,
                                                                    y: 0,
-                                                                   width: 1000,
-                                                                   height: 2000)))
+                                                                   width: 595.2 * 2,
+                                                                   height: 841.8 * 2)))
                         }
                     }
                 }

@@ -29,7 +29,7 @@ struct SavedDocumentsView: View {
 
     @State var columnCount: Int = 3
     @Binding var tabSelection: Int
-    @ObservedObject var dataModel = DataStorageModel()
+    @ObservedObject var dataModel: DataStorageModel
     @State var isSettingsPresented = false
     @State var itemsCount: Int = 0
 

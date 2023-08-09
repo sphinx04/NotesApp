@@ -23,6 +23,10 @@ class DataStorageModel: ObservableObject {
     @Published var isShareSheetPresented = false
 
     init() {
+        if savedDocumentsStorage.isEmpty {
+            savedDocumentsStorage.append(Document(name: "test", text: "# Welcome test"))
+        }
+        print("model init:", savedDocumentsStorage)
         self.savedDocuments = savedDocumentsStorage
         self.currentDocumentNumber = currentDocumentNumberStorage
     }

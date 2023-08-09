@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63CD85312A8391B600B8ADF7 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD85302A8391B600B8ADF7 /* Document.swift */; };
 		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
 		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
 		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63CD85302A8391B600B8ADF7 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
 				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
+				63CD85302A8391B600B8ADF7 /* Document.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */,
 				8A2B736929AF9254005AA038 /* TopBarButtonModifier.swift in Sources */,
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
+				63CD85312A8391B600B8ADF7 /* Document.swift in Sources */,
 				63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
 				63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */,

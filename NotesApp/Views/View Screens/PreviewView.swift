@@ -17,19 +17,17 @@ struct PreviewView: View {
 
     var body: some View {
         VStack {
-            // if !isPreviewHidden {
-                GeometryReader { _ in
-                    VStack {
-                        currentView
-                        ShareLink("Export PDF",
-                                  item: saveToPDF(mdWebView.webview,
-                                                  rect: CGRect(x: 0,
-                                                               y: 0,
-                                                               width: 595.2 * 2,
-                                                               height: 841.8 * 2)))
-                    }
+            GeometryReader { _ in
+                VStack {
+                    currentView
+                    ShareLink("Export PDF",
+                              item: saveToPDF(mdWebView.webview,
+                                              rect: CGRect(x: 0,
+                                                           y: 0,
+                                                           width: 595.2 * 2,
+                                                           height: 841.8 * 2)))
                 }
-            // }
+            }
         }
         .onAppear {
             currentText = dataModel.getCurrentText()

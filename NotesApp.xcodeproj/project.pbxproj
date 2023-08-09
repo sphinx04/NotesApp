@@ -32,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3D4EA90124D829D651BB4F41 /* libPods-NotesApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotesApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -80,6 +79,8 @@
 				8A2B736A29AFD372005AA038 /* SavedDocumentsView.swift */,
 				8A8EF29C29BF31650032039E /* DocumentView.swift */,
 				8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */,
+				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
+				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,12 +96,37 @@
 			path = "View Screens";
 			sourceTree = "<group>";
 		};
+		63D677422A836B9C006F9EC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
+				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63D677432A836BB2006F9EC4 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8A45703D29B2296C0057DDA0 /* TabItemViewModifier.swift */,
+				8A2B736829AF9254005AA038 /* TopBarButtonModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		63D677442A836C0B006F9EC4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE445129AE0BC500CB855C /* ViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8A8CDAC329ACF03500C29448 = {
 			isa = PBXGroup;
 			children = (
 				8A8CDACE29ACF03500C29448 /* NotesApp */,
 				8A8CDACD29ACF03500C29448 /* Products */,
-				8A8CDAE129ACF1DC00C29448 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,15 +141,11 @@
 		8A8CDACE29ACF03500C29448 /* NotesApp */ = {
 			isa = PBXGroup;
 			children = (
+				63D677442A836C0B006F9EC4 /* Extensions */,
+				63D677432A836BB2006F9EC4 /* Modifiers */,
+				63D677422A836B9C006F9EC4 /* Model */,
 				63D6773A2A82F540006F9EC4 /* Views */,
 				8A8CDACF29ACF03500C29448 /* NotesAppApp.swift */,
-				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
-				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
-				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
-				8A45703D29B2296C0057DDA0 /* TabItemViewModifier.swift */,
-				8A2B736829AF9254005AA038 /* TopBarButtonModifier.swift */,
-				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
-				8AAE445129AE0BC500CB855C /* ViewExtensions.swift */,
 				8A8CDAD329ACF03700C29448 /* Assets.xcassets */,
 				8A8CDAD529ACF03700C29448 /* Preview Content */,
 				8A8CDAE029ACF12300C29448 /* markdown */,
@@ -137,14 +159,6 @@
 				8A8CDAD629ACF03700C29448 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		8A8CDAE129ACF1DC00C29448 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3D4EA90124D829D651BB4F41 /* libPods-NotesApp.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

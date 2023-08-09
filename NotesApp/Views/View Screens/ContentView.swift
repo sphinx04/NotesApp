@@ -37,15 +37,6 @@ struct ContentView: View {
     }
 }
 
-// DocumentsExplorerView
-
-
-// PlainTextView
-
-
-// PreviewView
-
-// ContentView_Previews
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

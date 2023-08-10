@@ -7,29 +7,11 @@
 
 import SwiftUI
 
-struct Document: Codable, Identifiable {
-    var id = UUID()
-    var name: String = "Document name"
-    var text: String = "# Welcome"
-    var lastModified = Date.now
-
-    init(name: String, text: String) {
-        self.name = name
-        self.text = text
-    }
-
-    static func == (lhs: Document, rhs: Document) -> Bool {
-        lhs.id      == rhs.id &&
-        lhs.name    == rhs.name &&
-        lhs.text    == lhs.text
-    }
-}
-
 struct SavedDocumentsView: View {
 
     @State var columnCount: Int = 3
     @Binding var tabSelection: Int
-    @ObservedObject var dataModel = DataStorageModel()
+    @ObservedObject var dataModel: DataStorageModel
     @State var isSettingsPresented = false
     @State var itemsCount: Int = 0
 

@@ -17,6 +17,7 @@ class DataStorageModel: ObservableObject {
     @Published var exportFile = false
     @Published var renameDocument = false
     @Published var currentName: String = "name"
+    @Published var currentText: String = "text"
     @Published var isDocumentsHidden: Bool = true
     @Published var isTextFieldHidden: Bool = true
     @Published var isPreviewHidden: Bool = true
@@ -26,18 +27,20 @@ class DataStorageModel: ObservableObject {
         if savedDocumentsStorage.isEmpty {
             savedDocumentsStorage.append(Document(name: "test", text: "# Welcome test"))
         }
-        print("model init:", savedDocumentsStorage)
         self.savedDocuments = savedDocumentsStorage
         self.currentDocumentNumber = currentDocumentNumberStorage
+        self.currentText = getCurrentText()
     }
 
     func refreshStorage() {
         savedDocumentsStorage = savedDocuments
         currentDocumentNumberStorage = currentDocumentNumber
+        objectWillChange.send()
     }
 
     func getDocumentsArray() -> [Document] {
         savedDocuments
+        
     }
 
     func addDocument(_ document: Document) {
@@ -61,11 +64,13 @@ class DataStorageModel: ObservableObject {
     }
 
     func setCurrentName(_ name: String) {
+        currentName = name
         savedDocuments[currentDocumentNumber].name = name
         refreshStorage()
     }
 
     func setCurrentText(_ text: String) {
+        currentText = text
         savedDocuments[currentDocumentNumber].text = text
         refreshStorage()
     }
@@ -75,7 +80,9 @@ class DataStorageModel: ObservableObject {
     }
 
     func getCurrentText() -> String {
-        savedDocuments[currentDocumentNumber].text
+        objectWillChange.send()
+        print("appear", savedDocuments[currentDocumentNumber].text)
+        return savedDocuments[currentDocumentNumber].text
     }
 
     func getCurrentDocument() -> Document {

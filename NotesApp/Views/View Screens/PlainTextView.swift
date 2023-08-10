@@ -11,22 +11,20 @@ import HighlightedTextEditor
 struct PlainTextView: View {
     @ObservedObject var dataModel: DataStorageModel
     @FocusState private var focusedField: Field?
-    @State var currentText: String = "text"
-    @State var currentName: String = "text"
 
     var body: some View {
         VStack(spacing: 0) {
             TopBarActionsView(
                 exportFile: $dataModel.exportFile,
                 renameDocument: $dataModel.renameDocument,
-                fileName: $currentName
+                fileName: $dataModel.currentName
             )
             .alert("Save file", isPresented: $dataModel.exportFile, actions: {
-
-                TextField("File name", text: $currentName)
+                
+                TextField("File name", text: $dataModel.currentName)
 
                 Button("Cancel", action: {})
-
+                
                 Button {
                     dataModel.isShareSheetPresented = true
                 } label: {
@@ -36,7 +34,7 @@ struct PlainTextView: View {
                 Text("Please enter file name:")
             })
             .alert("Rename document", isPresented: $dataModel.renameDocument, actions: {
-                TextField("Document name", text: $currentName)
+                TextField("Document name", text: $dataModel.currentName)
                 Button("Cancel", action: {})
                 Button {
                 } label: {
@@ -45,26 +43,57 @@ struct PlainTextView: View {
             }, message: {
                 Text("Please enter document name:")
             })
-                                   .transition(.opacity)
-
-            HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
+            .transition(.opacity)
+            
+            HighlightedTextEditor(text: $dataModel.currentText, highlightRules: .markdown)
                 .onSelectionChange { _ in }
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
-                    // Keyboard toolbar content
+                    if focusedField != .filename {
+                        HStack {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    TextFormatButtons()
+                                    SymbolButton(symbol: "`")
+                                    SymbolButton(symbol: "#")
+                                    SymbolButton(symbol: "!")
+                                    SymbolButton(symbol: "[")
+                                    SymbolButton(symbol: "]")
+                                    
+                                    Spacer()
+                                    
+                                } // HSTACK
+                                .padding(.bottom, 7)
+                                .padding(.horizontal, 5)
+                                
+                            }
+                            
+                            if self.focusedField != nil {
+                                Button {
+                                    self.focusedField = nil
+                                } label: {
+                                    Image(systemName: "keyboard.chevron.compact.down.fill")
+                                        .font(.title)
+                                }
+                                .padding(.horizontal, 10)
+                            }
+                        }
+                    }
                 }
-        }
-        .onAppear {
-            print("text editor visible")
-            // dataModel = DataStorageModel()
-            dataModel.refreshStorage()
-            currentName = dataModel.getCurrentName()
-            currentText = dataModel.getCurrentText()
-        }
-        .onDisappear {
-            print("text editor visible")
-            dataModel.setCurrentName(currentName)
-            dataModel.setCurrentText(currentText)
+                .onAppear {
+                    print("text editor visible")
+                    // dataModel = DataStorageModel()
+                    dataModel.currentName = dataModel.getCurrentName()
+                    dataModel.currentText = dataModel.getCurrentText()
+                    dataModel.refreshStorage()
+                }
+                .onDisappear {
+                    print("text editor visible")
+                    dataModel.setCurrentName(dataModel.currentName)
+                    dataModel.setCurrentText(dataModel.currentText)
+                    dataModel.refreshStorage()
+                    dataModel.objectWillChange.send()
+                }
         }
     }
 }

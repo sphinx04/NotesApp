@@ -11,6 +11,7 @@
 		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
 		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
 		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
+		63DBC2A82A84E9FB009B118A /* SymbolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DBC2A72A84E9FB009B118A /* SymbolButton.swift */; };
 		8A02F02629B61AE400BA1420 /* DataStorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F02529B61AE400BA1420 /* DataStorageModel.swift */; };
 		8A02F02829B63ED600BA1420 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 8A02F02729B63ED600BA1420 /* Markdown */; };
 		8A2B736329AF5F9F005AA038 /* ExportFileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */; };
@@ -37,6 +38,7 @@
 		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		63DBC2A72A84E9FB009B118A /* SymbolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolButton.swift; sourceTree = "<group>"; };
 		8A02F02529B61AE400BA1420 /* DataStorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageModel.swift; sourceTree = "<group>"; };
 		8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileButtonView.swift; sourceTree = "<group>"; };
 		8A2B736429AF607E005AA038 /* TopBarActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarActionsView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				8A2B736229AF5F9F005AA038 /* ExportFileButtonView.swift */,
 				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
 				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
+				63DBC2A72A84E9FB009B118A /* SymbolButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				8A8CDAD029ACF03500C29448 /* NotesAppApp.swift in Sources */,
 				8A8EF29D29BF31660032039E /* DocumentView.swift in Sources */,
 				8A8EF2A729C1D0060032039E /* TextFormatButtons.swift in Sources */,
+				63DBC2A82A84E9FB009B118A /* SymbolButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

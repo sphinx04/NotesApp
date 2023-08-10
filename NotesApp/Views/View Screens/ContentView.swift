@@ -30,7 +30,7 @@ struct ContentView: View {
                 .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing", isHidden: $dataModel.isTextFieldHidden)
                 .tag(2)
 
-            PreviewView(dataModel: dataModel, currentText: dataModel.getCurrentText())
+            PreviewView(dataModel: dataModel)
                 .tabItemViewModifier(label: "Preview", systemImage: "doc.richtext", isHidden: $dataModel.isPreviewHidden)
                 .tag(3)
         }

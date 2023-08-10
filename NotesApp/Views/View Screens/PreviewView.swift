@@ -11,27 +11,28 @@ import Markdown
 struct PreviewView: View {
 
     @ObservedObject var dataModel: DataStorageModel
-    @State private var currentView: Markdown?
 
-    @State var currentText: String
+    @State private var currentText: String = ""
 
     var body: some View {
-        VStack {
-            GeometryReader { _ in
-                VStack {
-                    currentView
-                    ShareLink("Export PDF",
-                              item: saveToPDF(mdWebView.webview,
-                                              rect: CGRect(x: 0,
-                                                           y: 0,
-                                                           width: 595.2 * 2,
-                                                           height: 841.8 * 2)))
-                }
+        ZStack {
+            if mdWebView.webview.isLoading {
+                ProgressView()
+                    .font(.largeTitle)
             }
+            VStack {
+                Markdown(content: $currentText)
+                ShareLink("Export PDF",
+                          item: saveToPDF(mdWebView.webview,
+                                          rect: CGRect(x: 0,
+                                                       y: 0,
+                                                       width: 595.2 * 2,
+                                                       height: 841.8 * 2)))
+            }
+
         }
         .onAppear {
             currentText = dataModel.getCurrentText()
-            currentView = Markdown(content: $currentText)
         }
     }
 }

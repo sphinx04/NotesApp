@@ -9,8 +9,6 @@ import WebKit
     public typealias ViewRepresentable = UIViewRepresentable
 #endif
 
-public var mdWebView = MarkdownWebView()
-
 public struct Markdown: ViewRepresentable {
 
     @Binding var content: String
@@ -18,14 +16,20 @@ public struct Markdown: ViewRepresentable {
     @Environment(\.markdownStyle) private var style: MarkdownStyle
     var textDidChanged: ((String) -> Void)?
     var theme: ColorScheme?
+    var action: (MarkdownWebView) -> Void
 
-    public init(content: Binding<String>) {
+    public init(content: Binding<String>,
+                action: @escaping ((MarkdownWebView) -> Void) = { _ in }) {
         self._content = content
-        // self.theme = colorScheme
+        self.action = action
+        self.theme = colorScheme
     }
-    public init(content: Binding<String>, theme: ColorScheme?) {
+    public init(content: Binding<String>,
+                theme: ColorScheme?,
+                action: @escaping ((MarkdownWebView) -> Void) = { _ in }) {
         self._content = content
         self.theme = theme
+        self.action = action
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -33,36 +37,36 @@ public struct Markdown: ViewRepresentable {
     }
     private func getWebView(context: Context) -> MarkdownWebView {
         let codeView = MarkdownWebView()
-        mdWebView = codeView
-
         codeView.setContent(content)
-        if style.padding != nil {
+        if (style.padding != nil) {
             codeView.setPadding(style.padding!)
         }
-        if style.paddingTop != nil {
+        if (style.paddingTop != nil) {
             codeView.setPaddingTop(style.paddingTop!)
         }
-        if style.paddingBottom != nil {
+        if (style.paddingBottom != nil) {
             codeView.setPaddingBottom(style.paddingBottom!)
         }
-        if style.paddingLeft != nil {
+        if (style.paddingLeft != nil) {
             codeView.setPaddingLeft(style.paddingLeft!)
         }
-        if style.paddingRight != nil {
+        if (style.paddingRight != nil) {
             codeView.setPaddingRight(style.paddingRight!)
         }
         codeView.textDidChanged = { text in
             context.coordinator.set(content: text)
         }
-        // colorScheme == .dark ? codeView.setTheme(.dark) : codeView.setTheme(.light)
-        codeView.setTheme(colorScheme)
+        colorScheme == .dark ? codeView.setTheme(.dark) : codeView.setTheme(.light)
+        action(codeView)
+
         return codeView
     }
 
+
+
     private func updateView(_ webview: MarkdownWebView, context: Context) {
         if context.coordinator.colorScheme != colorScheme {
-            // colorScheme == .dark ? webview.setTheme(.dark) : webview.setTheme(.light)
-            webview.setTheme(colorScheme)
+            colorScheme == .dark ? webview.setTheme(.dark) : webview.setTheme(.light)
             context.coordinator.set(colorScheme: colorScheme)
         }
         if context.coordinator.content != content {
@@ -85,6 +89,7 @@ public struct Markdown: ViewRepresentable {
 
     public func updateUIView(_ webview: MarkdownWebView, context: Context) {
         updateView(webview, context: context)
+        action(webview)
     }
 }
 
@@ -130,16 +135,3 @@ extension EnvironmentValues {
 private struct MarkdownStyleKey: EnvironmentKey {
   static let defaultValue = MarkdownStyle()
 }
-
-#if DEBUG
-struct Markdown_Previews: PreviewProvider {
-    static private var jsonString = """
-    ## Hello World
-
-    Markdown Preview.
-    """
-    static var previews: some View {
-        Markdown(content: .constant(jsonString))
-    }
-}
-#endif

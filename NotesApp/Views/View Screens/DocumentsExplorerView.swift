@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DocumentsExplorerView: View {
+    @EnvironmentObject var realmManager: RealmManager
     @ObservedObject var dataModel: DataStorageModel
     @Binding var tabSelection: Int
 

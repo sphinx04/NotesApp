@@ -7,85 +7,83 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
 
 class DataStorageModel: ObservableObject {
-    @AppStorage("documents") var savedDocumentsStorage: [Document] = [Document(name: "test", text: "# Welcome test")]
+    @State var realmManager: RealmManager
     @AppStorage("currentDocumentNumber") var currentDocumentNumberStorage: Int = 0
 
-    @Published var savedDocuments = [Document]()
+    @Published var savedDocuments = [StoredDocument]()
     @Published var currentDocumentNumber: Int = 0
     @Published var exportFile = false
     @Published var renameDocument = false
     @Published var currentName: String = "name"
-    @Published var currentText: String = "text"
+//    @Published var currentText: String = "text"
     @Published var isDocumentsHidden: Bool = true
     @Published var isTextFieldHidden: Bool = true
     @Published var isPreviewHidden: Bool = true
     @Published var isShareSheetPresented = false
 
-    init() {
-        if savedDocumentsStorage.isEmpty {
-            savedDocumentsStorage.append(Document(name: "test", text: "# Welcome test"))
+    init(realmManager: RealmManager) {
+        self.realmManager = realmManager
+        if realmManager.documents.isEmpty {
+//            savedDocumentsStorage.append(Document(name: "test", text: "# Welcome test"))
+            realmManager.addDocument(name: "test", text: "# Welcome test")
+            self.currentDocumentNumber = 0
         }
-        self.savedDocuments = savedDocumentsStorage
-        self.currentDocumentNumber = currentDocumentNumberStorage
-        self.currentText = getCurrentText()
+        self.savedDocuments = realmManager.documents
+//        self.currentText = getCurrentText()
     }
 
-    func refreshStorage() {
-        savedDocumentsStorage = savedDocuments
-        currentDocumentNumberStorage = currentDocumentNumber
-        objectWillChange.send()
+    func addDocument(name: String, text: String) {
+//        savedDocuments.append(document)
+        realmManager.addDocument(name: name, text: text)
     }
 
-    func getDocumentsArray() -> [Document] {
-        savedDocuments
-        
+    func addDocument(document: StoredDocument) {
+//        savedDocuments.append(document)
+        realmManager.addDocument(document: document)
     }
 
-    func addDocument(_ document: Document) {
-        savedDocuments.append(document)
-        refreshStorage()
-    }
-    func removeDocument(_ document: Document) {
-        savedDocuments.remove(at: savedDocuments.firstIndex(where: {$0 == document})!)
+    func removeDocument(id: ObjectId) {
+//        savedDocuments.remove(at: savedDocuments.firstIndex(where: {$0 == document})!)
+        realmManager.deleteDocument(id: id)
         currentDocumentNumber = 0
-        refreshStorage()
     }
 
-    func setCurrentDocument(_ document: Document) {
-        currentDocumentNumber = savedDocuments.firstIndex(where: {$0 == document})!
-        refreshStorage()
-    }
-
-    func resetAppStorage() {
-        savedDocuments = [Document(name: "test", text: "# Welcome test")]
-        currentDocumentNumber = 0
+    func setCurrentDocument(id: ObjectId) {
+        if let number = realmManager.documents.firstIndex(where: {$0.id == id}) {
+            currentDocumentNumber = number
+            print("Current doc assign \(number)")
+        } else {
+            print("Current doc assign failed")
+        }
     }
 
     func setCurrentName(_ name: String) {
         currentName = name
-        savedDocuments[currentDocumentNumber].name = name
-        refreshStorage()
+//        savedDocuments[currentDocumentNumber].name = name
+        realmManager.updateDocument(id: realmManager.documents[currentDocumentNumber].id,
+                                    name: name)
     }
 
     func setCurrentText(_ text: String) {
-        currentText = text
-        savedDocuments[currentDocumentNumber].text = text
-        refreshStorage()
+//        currentText = text
+        realmManager.updateDocument(id: realmManager.documents[currentDocumentNumber].id,
+                                    text: text)
     }
 
     func getCurrentName() -> String {
-        savedDocuments[currentDocumentNumber].name
+        realmManager.documents[currentDocumentNumber].name
     }
 
     func getCurrentText() -> String {
         objectWillChange.send()
-        print("appear", savedDocuments[currentDocumentNumber].text)
-        return savedDocuments[currentDocumentNumber].text
+        print("currentDocumentNumber:", currentDocumentNumber)
+        return realmManager.documents[currentDocumentNumber].text
     }
 
-    func getCurrentDocument() -> Document {
-        savedDocuments[currentDocumentNumber]
+    func getCurrentDocument() -> StoredDocument {
+        realmManager.documents[currentDocumentNumber]
     }
 }

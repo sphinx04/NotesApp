@@ -17,8 +17,13 @@ let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [
 // swiftlint: enable force_try
 
 struct ContentView: View {
-    @ObservedObject var dataModel = DataStorageModel()
+    @ObservedObject var dataModel: DataStorageModel
     @State private var tabSelection = 1
+
+    init() {
+        self.dataModel = DataStorageModel(realmManager: RealmManager())
+        self.tabSelection = 1
+    }
 
     var body: some View {
         TabView(selection: $tabSelection) {

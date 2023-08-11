@@ -11,10 +11,11 @@ import Markdown
 struct PreviewView: View {
     
     @ObservedObject var dataModel: DataStorageModel
-    @State var currentPreview: Markdown?
-    @State var markdownWebView = MarkdownWebView()
-    @State var isLoading = true
-    
+    @State private var currentPreview: Markdown?
+    @State private var markdownWebView = MarkdownWebView()
+    @State private var isLoading = true
+    @State private var currentText = ""
+
     var body: some View {
         ZStack {
             
@@ -35,9 +36,10 @@ struct PreviewView: View {
         }
         .onAppear {
             isLoading = true
-            currentPreview = Markdown(content: $dataModel.currentText)
+            currentText = dataModel.getCurrentText()
+            currentPreview = Markdown(content: $currentText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                currentPreview = Markdown(content: $dataModel.currentText) { webView in
+                currentPreview = Markdown(content: $currentText) { webView in
                     DispatchQueue.main.async {
                         markdownWebView = webView
                         withAnimation {

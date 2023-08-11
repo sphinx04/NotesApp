@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct DocumentView: View {
-    var document: Document
+    var document: StoredDocument
     var fontSizeMultiplyer: Double
     var duplicateAction: () -> Void
     var deleteAction: () -> Void
 
-    init(_ document: Document,
+    init(_ document: StoredDocument,
          fontSizeMultiplyer: Double,
          duplicateAction: @escaping () -> Void,
          deleteAction: @escaping () -> Void) {

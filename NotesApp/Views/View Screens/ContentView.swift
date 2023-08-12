@@ -9,9 +9,6 @@ import SwiftUI
 import Markdown
 import HighlightedTextEditor
 
-enum Field: Int, CaseIterable {
-    case input, filename, exportFile
-}
 // swiftlint: disable force_try
 let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 // swiftlint: enable force_try

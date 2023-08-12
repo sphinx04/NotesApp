@@ -8,6 +8,10 @@
 import SwiftUI
 import HighlightedTextEditor
 
+enum Field: Int, CaseIterable {
+    case input, filename, exportFile
+}
+
 struct PlainTextView: View {
     @EnvironmentObject var realmManager: RealmManager
     @ObservedObject var dataModel: DataStorageModel
@@ -20,7 +24,7 @@ struct PlainTextView: View {
             TopBarActionsView(
                 exportFile: $dataModel.exportFile,
                 renameDocument: $dataModel.renameDocument,
-                fileName: $dataModel.currentName
+                fileName: $currentName
             )
             .alert("Save file", isPresented: $dataModel.exportFile, actions: {
                 
@@ -52,7 +56,7 @@ struct PlainTextView: View {
                 .onSelectionChange { _ in }
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
-                    if focusedField != .filename {
+                    if focusedField == .input {
                         HStack {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {

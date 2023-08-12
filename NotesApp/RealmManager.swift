@@ -10,11 +10,15 @@ import RealmSwift
 
 final class RealmManager: ObservableObject {
     private(set) var localRealm: Realm?
-    @Published private(set) var documents: [StoredDocument] = []
+    @Published private(set) var documents: [Document] = []
 
     init() {
         openRealm()
         getDocuments()
+    }
+
+    func getByID(_ id: ObjectId) -> Document? {
+        documents.first(where: {$0.id == id})
     }
 
     func openRealm() {
@@ -34,7 +38,7 @@ final class RealmManager: ObservableObject {
         do {
             if let localRealm {
                 try localRealm.write {
-                    let newDocument = StoredDocument(value: ["name": name,
+                    let newDocument = Document(value: ["name": name,
                                                              "text": text,
                                                              "lastModified": Date.now])
                     localRealm.add(newDocument)
@@ -47,7 +51,7 @@ final class RealmManager: ObservableObject {
         }
     }
 
-    func addDocument(document: StoredDocument) {
+    func addDocument(document: Document) {
         do {
             if let localRealm {
                 try localRealm.write {
@@ -63,7 +67,7 @@ final class RealmManager: ObservableObject {
 
     func getDocuments() {
         if let localRealm {
-            let allDocuments = localRealm.objects(StoredDocument.self).sorted(byKeyPath: "lastModified")
+            let allDocuments = localRealm.objects(Document.self).sorted(byKeyPath: "lastModified", ascending: false)
             documents = []
             allDocuments.forEach { document in
                 documents.append(document)
@@ -75,7 +79,7 @@ final class RealmManager: ObservableObject {
     func updateDocument(id: ObjectId, name: String? = nil, text: String? = nil) {
         if let localRealm {
             do {
-                let documentToUpdate = localRealm.objects(StoredDocument.self).filter(NSPredicate(format: "id == %@", id))
+                let documentToUpdate = localRealm.objects(Document.self).filter(NSPredicate(format: "id == %@", id))
                 guard !documentToUpdate.isEmpty else { return }
 
                 try localRealm.write {
@@ -98,13 +102,12 @@ final class RealmManager: ObservableObject {
     func deleteDocument(id: ObjectId) {
         if let localRealm {
             do {
-                let documentToDelete = localRealm.objects(StoredDocument.self).filter(NSPredicate(format: "id == %@", id))
+                let documentToDelete = localRealm.objects(Document.self).filter(NSPredicate(format: "id == %@", id))
                 guard !documentToDelete.isEmpty else { return }
                 try localRealm.write {
                     localRealm.delete(documentToDelete[0])
                     getDocuments()
                 }
-                print("Document deleted:", documentToDelete[0].name)
             } catch {
                 print(error.localizedDescription)
             }

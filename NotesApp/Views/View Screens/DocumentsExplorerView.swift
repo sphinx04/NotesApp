@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct DocumentsExplorerView: View {
+    @EnvironmentObject var realmManager: RealmManager
     @ObservedObject var dataModel: DataStorageModel
     @Binding var tabSelection: Int
 
     var body: some View {
         VStack(spacing: 0) {
-            if !dataModel.isDocumentsHidden {
+//            if !dataModel.isDocumentsHidden {
                 SavedDocumentsView(tabSelection: $tabSelection, dataModel: dataModel)
                     .transition(.opacity)
-            }
+//            }
         }
     }
 }

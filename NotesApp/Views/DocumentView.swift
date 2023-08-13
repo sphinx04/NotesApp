@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Markdown
 
 struct DocumentView: View {
     var document: Document
     var fontSizeMultiplyer: Double
     var duplicateAction: () -> Void
     var deleteAction: () -> Void
-
+    
     init(_ document: Document,
          fontSizeMultiplyer: Double,
          duplicateAction: @escaping () -> Void,
@@ -22,7 +23,7 @@ struct DocumentView: View {
         self.duplicateAction = duplicateAction
         self.deleteAction = deleteAction
     }
-
+    
     func getDateString(from date: Date) -> String {
         let calendar = Calendar(identifier: .gregorian)
         var dateString = ""
@@ -37,7 +38,7 @@ struct DocumentView: View {
         }
         return dateString
     }
-
+    
     var body: some View {
         VStack {
             ZStack(alignment: .topLeading) {
@@ -46,12 +47,14 @@ struct DocumentView: View {
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
                     .strokeBorder(.black, lineWidth: 0.2)
                     .foregroundColor(.white)
-
+                
                 Text(document.text)
                     .padding(30 * fontSizeMultiplyer)
                     .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
                     .foregroundColor(.black)
                     .zIndex(80)
+//                Markdown(content: .constant(document.text))
+//                    .padding(30 * fontSizeMultiplyer)
             }
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))
             .contextMenu {
@@ -68,12 +71,12 @@ struct DocumentView: View {
             }
             .aspectRatio(3/4, contentMode: .fit)
             .padding([.top, .leading, .trailing])
-
+            
             Text(document.name)
                 .font(.system(size: 14))
                 .multilineTextAlignment(.center)
                 .lineLimit(1)
-
+            
             Text(getDateString(from: document.lastModified))
                 .font(.system(size: 10))
                 .multilineTextAlignment(.center)

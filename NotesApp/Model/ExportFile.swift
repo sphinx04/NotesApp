@@ -8,8 +8,8 @@
 import Foundation
 import WebKit
 
-func saveToFile(_ str: String, fileName: String) -> URL {
-    let url = getDocumentsDirectory().appendingPathComponent("\(fileName).md")
+func saveToFile(_ str: String, fileName: String, format: String) -> URL {
+    let url = getDocumentsDirectory().appendingPathComponent("\(fileName)\(format)")
 
     do {
         try str.write(to: url, atomically: true, encoding: .utf8)
@@ -19,7 +19,7 @@ func saveToFile(_ str: String, fileName: String) -> URL {
     return url
 }
 
-@MainActor func saveToPDF(_ webView: WKWebView, rect: CGRect) -> URL {
+func saveToPDF(_ webView: WKWebView, rect: CGRect) -> URL {
     let pdfData = webView.createPDFData(rect: rect)
     let url = getDocumentsDirectory().appendingPathComponent("output.pdf")
     do {

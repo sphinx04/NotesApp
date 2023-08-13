@@ -8,11 +8,16 @@
 import SwiftUI
 import HighlightedTextEditor
 
+enum Field: Int, CaseIterable {
+    case input, filename, exportFile
+}
+
 struct PlainTextView: View {
+    @EnvironmentObject var realmManager: RealmManager
     @ObservedObject var dataModel: DataStorageModel
     @FocusState private var focusedField: Field?
-    @State var currentText: String = "text"
-    @State var currentName: String = "text"
+    @State private var currentText = ""
+    @State private var currentName = ""
 
     var body: some View {
         VStack(spacing: 0) {
@@ -22,11 +27,11 @@ struct PlainTextView: View {
                 fileName: $currentName
             )
             .alert("Save file", isPresented: $dataModel.exportFile, actions: {
-
+                
                 TextField("File name", text: $currentName)
 
                 Button("Cancel", action: {})
-
+                
                 Button {
                     dataModel.isShareSheetPresented = true
                 } label: {
@@ -45,26 +50,30 @@ struct PlainTextView: View {
             }, message: {
                 Text("Please enter document name:")
             })
-                                   .transition(.opacity)
-
+            .transition(.opacity)
+            
             HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
                 .onSelectionChange { _ in }
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
-                    // Keyboard toolbar content
+                    TextFormatButtons(focusedField: _focusedField)
+                }
+                .onAppear {
+                    print("text editor visible")
+                    // dataModel = DataStorageModel()
+                    currentName = dataModel.getCurrentName()
+                    currentText = dataModel.getCurrentText()
+                }
+                .onDisappear {
+                    print("text editor visible")
+                    dataModel.setCurrentName(currentName)
+                    dataModel.setCurrentText(currentText)
+                    dataModel.objectWillChange.send()
                 }
         }
-        .onAppear {
-            print("text editor visible")
-            // dataModel = DataStorageModel()
-            dataModel.refreshStorage()
-            currentName = dataModel.getCurrentName()
-            currentText = dataModel.getCurrentText()
-        }
-        .onDisappear {
-            print("text editor visible")
-            dataModel.setCurrentName(currentName)
-            dataModel.setCurrentText(currentText)
-        }
     }
+}
+
+#Preview  {
+    ContentView()
 }

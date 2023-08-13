@@ -44,6 +44,12 @@ public extension WKWebView {
         self.bounds = oldBounds
         return printRenderer.generatePDFData()
     }
+
+    func changeFontSize(to fontSize: Int, completionHandler: ((Any?, Error?) -> Void)? = nil) {
+        let cssString = ".markdown-body { font-size: \(fontSize)px; }"
+        let jsString = "var style = document.createElement('style'); style.innerHTML = '\(cssString)'; document.head.appendChild(style);"
+        self.evaluateJavaScript(jsString, completionHandler: completionHandler)
+    }
 }
 
 extension UIPrintPageRenderer {

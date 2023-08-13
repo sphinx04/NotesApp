@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Markdown
 
 struct DocumentView: View {
     var document: Document
@@ -52,6 +53,8 @@ struct DocumentView: View {
                     .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
                     .foregroundColor(.black)
                     .zIndex(80)
+//                Markdown(content: .constant(document.text))
+//                    .padding(30 * fontSizeMultiplyer)
             }
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))
             .contextMenu {

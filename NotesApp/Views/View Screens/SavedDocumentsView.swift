@@ -36,7 +36,7 @@ struct SavedDocumentsView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Button {
                     isSettingsPresented = true

@@ -20,6 +20,16 @@ public struct Markdown: ViewRepresentable {
 
     public init(content: Binding<String>,
                 action: @escaping ((MarkdownWebView) -> Void) = { _ in }) {
+//        content.wrappedValue = content.wrappedValue.replacingOccurrences(of: """
+//                                                                         .markdown-body {
+//                                                                           font-size: 8px;
+//                                                                         }
+//                                                                         """,
+//                                                                         with: """
+//                                                                         .markdown-body {
+//                                                                           font-size: 20px;
+//                                                                         }
+//                                                                         """)
         self._content = content
         self.action = action
         self.theme = colorScheme

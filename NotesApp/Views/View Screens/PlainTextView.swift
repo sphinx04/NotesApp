@@ -8,20 +8,27 @@
 import SwiftUI
 import HighlightedTextEditor
 
+enum Field: Int, CaseIterable {
+    case input, filename, exportFile
+}
+
 struct PlainTextView: View {
+    @EnvironmentObject var realmManager: RealmManager
     @ObservedObject var dataModel: DataStorageModel
     @FocusState private var focusedField: Field?
+    @State private var currentText = ""
+    @State private var currentName = ""
 
     var body: some View {
         VStack(spacing: 0) {
             TopBarActionsView(
                 exportFile: $dataModel.exportFile,
                 renameDocument: $dataModel.renameDocument,
-                fileName: $dataModel.currentName
+                fileName: $currentName
             )
             .alert("Save file", isPresented: $dataModel.exportFile, actions: {
                 
-                TextField("File name", text: $dataModel.currentName)
+                TextField("File name", text: $currentName)
 
                 Button("Cancel", action: {})
                 
@@ -34,7 +41,7 @@ struct PlainTextView: View {
                 Text("Please enter file name:")
             })
             .alert("Rename document", isPresented: $dataModel.renameDocument, actions: {
-                TextField("Document name", text: $dataModel.currentName)
+                TextField("Document name", text: $currentName)
                 Button("Cancel", action: {})
                 Button {
                 } label: {
@@ -45,55 +52,28 @@ struct PlainTextView: View {
             })
             .transition(.opacity)
             
-            HighlightedTextEditor(text: $dataModel.currentText, highlightRules: .markdown)
+            HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
                 .onSelectionChange { _ in }
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
-                    if focusedField != .filename {
-                        HStack {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    TextFormatButtons()
-                                    SymbolButton(symbol: "`")
-                                    SymbolButton(symbol: "#")
-                                    SymbolButton(symbol: "!")
-                                    SymbolButton(symbol: "[")
-                                    SymbolButton(symbol: "]")
-                                    
-                                    Spacer()
-                                    
-                                } // HSTACK
-                                .padding(.bottom, 7)
-                                .padding(.horizontal, 5)
-                                
-                            }
-                            
-                            if self.focusedField != nil {
-                                Button {
-                                    self.focusedField = nil
-                                } label: {
-                                    Image(systemName: "keyboard.chevron.compact.down.fill")
-                                        .font(.title)
-                                }
-                                .padding(.horizontal, 10)
-                            }
-                        }
-                    }
+                    TextFormatButtons(focusedField: _focusedField)
                 }
                 .onAppear {
                     print("text editor visible")
                     // dataModel = DataStorageModel()
-                    dataModel.currentName = dataModel.getCurrentName()
-                    dataModel.currentText = dataModel.getCurrentText()
-                    dataModel.refreshStorage()
+                    currentName = dataModel.getCurrentName()
+                    currentText = dataModel.getCurrentText()
                 }
                 .onDisappear {
                     print("text editor visible")
-                    dataModel.setCurrentName(dataModel.currentName)
-                    dataModel.setCurrentText(dataModel.currentText)
-                    dataModel.refreshStorage()
+                    dataModel.setCurrentName(currentName)
+                    dataModel.setCurrentText(currentText)
                     dataModel.objectWillChange.send()
                 }
         }
     }
+}
+
+#Preview  {
+    ContentView()
 }

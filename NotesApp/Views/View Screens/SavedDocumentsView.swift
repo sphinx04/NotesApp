@@ -13,9 +13,8 @@ struct SavedDocumentsView: View {
     @Binding var tabSelection: Int
     @ObservedObject var dataModel: DataStorageModel
     @State var isSettingsPresented = false
-    @State var itemsCount: Int = 0
 
-    func createDocument() -> StoredDocument {
+    func createDocument() -> Document {
         let name = "Document \(dataModel.realmManager.documents.count + 1)"
         let text: String = """
         # \(name)
@@ -23,7 +22,7 @@ struct SavedDocumentsView: View {
         Enter your text here
 
         """
-        return StoredDocument(value: ["name": name,
+        return Document(value: ["name": name,
                                              "text": text,
                                              "lastModified": Date.now])
     }
@@ -54,21 +53,20 @@ struct SavedDocumentsView: View {
                     let name = "Document \(dataModel.realmManager.documents.count + 1)"
                     let text: String = """
                     # \(name)
-
+                    
                     Enter your text here
-
+                    
                     """
-
-                    let newDocument = StoredDocument(value: ["name": name,
-                                                                          "text": text,
-                                                                          "lastModified": Date.now])
-
+                    
+                    let newDocument = Document(value: ["name": name,
+                                                       "text": text,
+                                                       "lastModified": Date.now])
+                    
                     dataModel.addDocument(document: newDocument)
                     // dataModel.setCurrentDocument(newDocument)
                     dataModel.setCurrentDocument(id: newDocument.id)
-                    itemsCount = dataModel.savedDocuments.count
                     tabSelection = 2
-
+                    
                 } label: {
                     Image(systemName: "plus.circle")
                         .font(.largeTitle)
@@ -82,19 +80,22 @@ struct SavedDocumentsView: View {
                 ScrollView {
                     VStack {
                         LazyVGrid(columns: getColumnsArray(), alignment: .leading) {
-                            ForEach(dataModel.realmManager.documents) { document in
-                                DocumentView(document, fontSizeMultiplyer: 1/Double(columnCount)) {
-                                    dataModel.addDocument(name: document.name, text: document.text)
-                                    itemsCount = dataModel.savedDocuments.count
-                                } deleteAction: {
-                                    withAnimation(.linear(duration: 0.2).delay(1)) {
-                                        dataModel.removeDocument(id: document.id)
+                            ForEach(dataModel.realmManager.documents, id: \.id) { document in
+                                if !document.isInvalidated {
+                                    DocumentView(document, fontSizeMultiplyer: 1/Double(columnCount)) {
+                                        withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
+                                            dataModel.addDocument(name: "\(document.name)_copy",
+                                                                  text: document.text)
+                                        }
+                                    } deleteAction: {
+                                        withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
+                                            dataModel.removeDocument(id: document.id)
+                                        }
                                     }
-                                    itemsCount = dataModel.savedDocuments.count
-                                }
-                                .onTapGesture {
-                                    dataModel.setCurrentDocument(id: document.id)
-                                    tabSelection = 2
+                                    .onTapGesture {
+                                        dataModel.setCurrentDocument(id: document.id)
+                                        tabSelection = 2
+                                    }
                                 }
                             }
                         }  // LAZYVGRID

@@ -12,6 +12,9 @@ import RealmSwift
 class DataStorageModel: ObservableObject {
     @State var realmManager: RealmManager
 
+    @Published var currentText = ""
+    @Published var currentName = ""
+
     @Published var exportFile = false
     @Published var renameDocument = false
     @Published var isDocumentsHidden: Bool = true
@@ -57,14 +60,13 @@ class DataStorageModel: ObservableObject {
     }
 
     func setCurrentName(_ name: String) {
+        currentName = name
         realmManager.updateDocument(id: currentDocumentId, name: name)
-        objectWillChange.send()
     }
 
     func setCurrentText(_ text: String) {
+        currentText = text
         realmManager.updateDocument(id: currentDocumentId, text: text)
-        print("CURRENT TEXT in model (set):", realmManager.getByID(currentDocumentId)?.text ?? "Error")
-        objectWillChange.send()
     }
 
     func getCurrentName() -> String {

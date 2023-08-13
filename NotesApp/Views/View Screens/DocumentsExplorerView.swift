@@ -14,10 +14,10 @@ struct DocumentsExplorerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if !dataModel.isDocumentsHidden {
+//            if !dataModel.isDocumentsHidden {
                 SavedDocumentsView(tabSelection: $tabSelection, dataModel: dataModel)
                     .transition(.opacity)
-            }
+//            }
         }
     }
 }

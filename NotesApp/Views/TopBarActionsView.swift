@@ -22,6 +22,7 @@ struct TopBarActionsView: View {
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
+                    .padding(.horizontal)
 
                 Spacer()
             }

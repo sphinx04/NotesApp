@@ -110,6 +110,7 @@
 		63D677422A836B9C006F9EC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				634D315A2A8613B800500764 /* RealmManager.swift */,
 				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
 				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
 				634D315C2A86151E00500764 /* Document.swift */,
@@ -161,7 +162,6 @@
 				8A8CDAD329ACF03700C29448 /* Assets.xcassets */,
 				8A8CDAD529ACF03700C29448 /* Preview Content */,
 				8A8CDAE029ACF12300C29448 /* markdown */,
-				634D315A2A8613B800500764 /* RealmManager.swift */,
 			);
 			path = NotesApp;
 			sourceTree = "<group>";

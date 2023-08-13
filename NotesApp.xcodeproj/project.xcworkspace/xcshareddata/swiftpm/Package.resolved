@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "EditMenu",
+        "repositoryURL": "https://github.com/jayrhynas/EditMenu",
+        "state": {
+          "branch": null,
+          "revision": "5fde7775a9c51ce864972ff0635355ec2ae04279",
+          "version": "0.0.1"
+        }
+      },
+      {
         "package": "HighlightedTextEditor",
         "repositoryURL": "https://github.com/kyle-n/HighlightedTextEditor",
         "state": {

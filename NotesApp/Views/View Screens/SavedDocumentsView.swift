@@ -83,10 +83,10 @@ struct SavedDocumentsView: View {
                             ForEach(dataModel.realmManager.documents, id: \.id) { document in
                                 if !document.isInvalidated {
                                     DocumentView(document, fontSizeMultiplyer: 1/Double(columnCount)) {
-                                        // withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
+                                        withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
                                             dataModel.addDocument(name: "\(document.name)_copy",
                                                                   text: document.text)
-                                        // }
+                                        }
                                     } deleteAction: {
                                         withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
                                             dataModel.removeDocument(id: document.id)
@@ -100,7 +100,7 @@ struct SavedDocumentsView: View {
                             }
                         }  // LAZYVGRID
                         .padding()
-                        //.animation(.easeInOut, value: columnCount)
+                        .animation(.easeInOut, value: columnCount)
                     Spacer()
                 } // VSTACK
             } // SCROLLVIEW

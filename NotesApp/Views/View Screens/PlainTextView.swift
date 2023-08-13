@@ -56,36 +56,7 @@ struct PlainTextView: View {
                 .onSelectionChange { _ in }
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
-                    if focusedField == .input {
-                        HStack {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    TextFormatButtons()
-                                    SymbolButton(symbol: "`")
-                                    SymbolButton(symbol: "#")
-                                    SymbolButton(symbol: "!")
-                                    SymbolButton(symbol: "[")
-                                    SymbolButton(symbol: "]")
-                                    
-                                    Spacer()
-                                    
-                                } // HSTACK
-                                .padding(.bottom, 7)
-                                .padding(.horizontal, 5)
-                                
-                            }
-                            
-                            if self.focusedField != nil {
-                                Button {
-                                    self.focusedField = nil
-                                } label: {
-                                    Image(systemName: "keyboard.chevron.compact.down.fill")
-                                        .font(.title)
-                                }
-                                .padding(.horizontal, 10)
-                            }
-                        }
-                    }
+                    TextFormatButtons(focusedField: _focusedField)
                 }
                 .onAppear {
                     print("text editor visible")
@@ -101,4 +72,8 @@ struct PlainTextView: View {
                 }
         }
     }
+}
+
+#Preview  {
+    ContentView()
 }

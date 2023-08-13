@@ -19,21 +19,21 @@ struct ContentView: View {
 
     init() {
         self.dataModel = DataStorageModel(realmManager: RealmManager())
-        self.tabSelection = 1
+        self.tabSelection = 2
     }
 
     var body: some View {
         TabView(selection: $tabSelection) {
             DocumentsExplorerView(dataModel: dataModel, tabSelection: $tabSelection)
-                .tabItemViewModifier(label: "Saved", systemImage: "folder", isHidden: $dataModel.isDocumentsHidden)
+                .tabItemViewModifier(label: "Saved", systemImage: "folder")
                 .tag(1)
 
             PlainTextView(dataModel: dataModel)
-                .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing", isHidden: $dataModel.isTextFieldHidden)
+                .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing")
                 .tag(2)
 
             PreviewView(dataModel: dataModel)
-                .tabItemViewModifier(label: "Preview", systemImage: "doc.richtext", isHidden: $dataModel.isPreviewHidden)
+                .tabItemViewModifier(label: "Preview", systemImage: "doc.richtext")
                 .tag(3)
         }
     }

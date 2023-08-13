@@ -18,7 +18,6 @@ struct PreviewView: View {
 
     var body: some View {
         ZStack {
-            
             VStack {
                 currentPreview
                     .opacity(isLoading ? 0 : 1)
@@ -37,13 +36,16 @@ struct PreviewView: View {
         .onAppear {
             isLoading = true
             currentText = dataModel.getCurrentText()
-            currentPreview = Markdown(content: $currentText)
+            currentPreview = Markdown(content: $dataModel.currentText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                currentPreview = Markdown(content: $currentText) { webView in
+                currentPreview = Markdown(content: $dataModel.currentText) { webView in
                     DispatchQueue.main.async {
                         markdownWebView = webView
                         withAnimation {
                             isLoading = false
+                            markdownWebView.webview.evaluateJavaScript("document.documentElement.outerHTML.toString()") { html, _ in
+                                print(html)
+                            }
                         }
                     }
                 }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CodeEditor
-import HighlightedTextEditor
 
 enum Field: Int, CaseIterable {
     case input, filename, exportFile
@@ -19,19 +18,8 @@ struct PlainTextView: View {
     @FocusState private var focusedField: Field?
     @State private var currentText = ""
     @State private var currentName = ""
-    @State private var fontSize: CGFloat = 16
+    @State private var fontSize: CGFloat = 14
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
-
-    private let rules: [HighlightRule] = [
-        HighlightRule(pattern: betweenUnderscores, formattingRules: [
-            TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
-            TextFormattingRule(key: .foregroundColor, value: UIColor.red),
-            TextFormattingRule(key: .underlineStyle) { content, range in
-                if content.count > 10 { return NSUnderlineStyle.double.rawValue }
-                else { return NSUnderlineStyle.single.rawValue }
-            }
-        ])
-    ]
 
     var body: some View {
         VStack(spacing: 0) {

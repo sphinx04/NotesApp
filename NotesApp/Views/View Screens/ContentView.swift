@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Markdown
-import HighlightedTextEditor
 
 // swiftlint: disable force_try
 let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])

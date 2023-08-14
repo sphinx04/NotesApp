@@ -127,6 +127,8 @@ struct PreviewView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ContentView()
 }
+#endif

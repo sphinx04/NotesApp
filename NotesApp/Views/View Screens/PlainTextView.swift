@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CodeEditor
 import HighlightedTextEditor
 
 enum Field: Int, CaseIterable {
@@ -18,6 +19,19 @@ struct PlainTextView: View {
     @FocusState private var focusedField: Field?
     @State private var currentText = ""
     @State private var currentName = ""
+    @State private var fontSize: CGFloat = 16
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    private let rules: [HighlightRule] = [
+        HighlightRule(pattern: betweenUnderscores, formattingRules: [
+            TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
+            TextFormattingRule(key: .foregroundColor, value: UIColor.red),
+            TextFormattingRule(key: .underlineStyle) { content, range in
+                if content.count > 10 { return NSUnderlineStyle.double.rawValue }
+                else { return NSUnderlineStyle.single.rawValue }
+            }
+        ])
+    ]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -51,13 +65,19 @@ struct PlainTextView: View {
                 Text("Please enter document name:")
             })
             .transition(.opacity)
-            
-            HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
-                .onSelectionChange { _ in }
+
+            CodeEditor(source: $currentText, language: .markdown, theme: .pojoaque, fontSize: $fontSize)
+            //HighlightedTextEditor(text: $currentText, highlightRules: .markdown)
+
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
                     TextFormatButtons(focusedField: _focusedField)
                 }
+//                .toolbar {
+//                    ToolbarItemGroup(placement: .keyboard) {
+//                        TextFormatButtons(focusedField: _focusedField)
+//                    }
+//                }
                 .onAppear {
                     print("text editor visible")
                     // dataModel = DataStorageModel()
@@ -74,6 +94,8 @@ struct PlainTextView: View {
     }
 }
 
-#Preview  {
-    ContentView()
+struct PlainTextView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

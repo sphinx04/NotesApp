@@ -7,13 +7,16 @@
 
 import SwiftUI
 import Markdown
+import CodeEditor
 
 struct DocumentView: View {
     var document: Document
     var fontSizeMultiplyer: Double
     var duplicateAction: () -> Void
     var deleteAction: () -> Void
-    
+    var scaleMultiplier = 0.5
+    @State private var fontSize: CGFloat = 0.1
+
     init(_ document: Document,
          fontSizeMultiplyer: Double,
          duplicateAction: @escaping () -> Void,
@@ -53,9 +56,8 @@ struct DocumentView: View {
                     .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
                     .foregroundColor(.black)
                     .zIndex(80)
-//                Markdown(content: .constant(document.text))
-//                    .padding(30 * fontSizeMultiplyer)
-            }
+
+            } //ZSTACK
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))
             .contextMenu {
                 Button {

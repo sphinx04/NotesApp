@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "HighlightedTextEditor",
-        "repositoryURL": "https://github.com/kyle-n/HighlightedTextEditor",
-        "state": {
-          "branch": null,
-          "revision": "7069ede002afc6bde867aef7035f45ff72dc839c",
-          "version": "2.1.0"
-        }
-      },
-      {
         "package": "RealmDatabase",
         "repositoryURL": "https://github.com/realm/realm-core.git",
         "state": {

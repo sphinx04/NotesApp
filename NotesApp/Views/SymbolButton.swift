@@ -20,6 +20,8 @@ struct SymbolButton: View {
     }
 }
 
+#if DEBUG
 #Preview {
     SymbolButton(symbol: ".")
 }
+#endif

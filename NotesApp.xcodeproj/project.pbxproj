@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633145ED2A8988D5009D6644 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 633145EC2A8988D5009D6644 /* HighlightedTextEditor */; };
+		633145F32A89FF15009D6644 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 633145F22A89FF15009D6644 /* CodeEditor */; };
+		633145F62A8A073B009D6644 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 633145F52A8A073B009D6644 /* HighlightedTextEditor */; };
+		633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 633145F82A8A1ADB009D6644 /* Highlightr */; };
 		634D31572A86134D00500764 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 634D31562A86134D00500764 /* Realm */; };
 		634D31592A86134D00500764 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 634D31582A86134D00500764 /* RealmSwift */; };
 		634D315B2A8613B800500764 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D315A2A8613B800500764 /* RealmManager.swift */; };
@@ -28,7 +32,6 @@
 		8A8CDAD429ACF03700C29448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8CDAD329ACF03700C29448 /* Assets.xcassets */; };
 		8A8CDAD729ACF03700C29448 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8CDAD629ACF03700C29448 /* Preview Assets.xcassets */; };
 		8A8EF29D29BF31660032039E /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF29C29BF31650032039E /* DocumentView.swift */; };
-		8A8EF2A329C082720032039E /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8EF2A229C082720032039E /* HighlightedTextEditor */; };
 		8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */; };
 		8A8EF2A729C1D0060032039E /* TextFormatButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */; };
 		8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE444F29AE076D00CB855C /* ExportFile.swift */; };
@@ -69,9 +72,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633145F62A8A073B009D6644 /* HighlightedTextEditor in Frameworks */,
+				633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */,
 				634D31592A86134D00500764 /* RealmSwift in Frameworks */,
 				634D31572A86134D00500764 /* Realm in Frameworks */,
-				8A8EF2A329C082720032039E /* HighlightedTextEditor in Frameworks */,
+				633145ED2A8988D5009D6644 /* HighlightedTextEditor in Frameworks */,
+				633145F32A89FF15009D6644 /* CodeEditor in Frameworks */,
 				8A02F02829B63ED600BA1420 /* Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,9 +198,12 @@
 			name = NotesApp;
 			packageProductDependencies = (
 				8A02F02729B63ED600BA1420 /* Markdown */,
-				8A8EF2A229C082720032039E /* HighlightedTextEditor */,
 				634D31562A86134D00500764 /* Realm */,
 				634D31582A86134D00500764 /* RealmSwift */,
+				633145EC2A8988D5009D6644 /* HighlightedTextEditor */,
+				633145F22A89FF15009D6644 /* CodeEditor */,
+				633145F52A8A073B009D6644 /* HighlightedTextEditor */,
+				633145F82A8A1ADB009D6644 /* Highlightr */,
 			);
 			productName = NotesApp;
 			productReference = 8A8CDACC29ACF03500C29448 /* NotesApp.app */;
@@ -225,8 +234,9 @@
 			);
 			mainGroup = 8A8CDAC329ACF03500C29448;
 			packageReferences = (
-				8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 				634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				633145F12A89FF15009D6644 /* XCLocalSwiftPackageReference "CodeEditor-main" */,
+				633145F72A8A1ADB009D6644 /* XCLocalSwiftPackageReference "Highlightr" */,
 			);
 			productRefGroup = 8A8CDACD29ACF03500C29448 /* Products */;
 			projectDirPath = "";
@@ -420,6 +430,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sphinx04.MarkNotesEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -449,6 +463,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sphinx04.MarkNotesEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,6 +496,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		633145F12A89FF15009D6644 /* XCLocalSwiftPackageReference "CodeEditor-main" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "CodeEditor-main";
+		};
+		633145F72A8A1ADB009D6644 /* XCLocalSwiftPackageReference "Highlightr" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Highlightr;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -487,17 +516,25 @@
 				kind = branch;
 			};
 		};
-		8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kyle-n/HighlightedTextEditor";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		633145EC2A8988D5009D6644 /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HighlightedTextEditor;
+		};
+		633145F22A89FF15009D6644 /* CodeEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CodeEditor;
+		};
+		633145F52A8A073B009D6644 /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HighlightedTextEditor;
+		};
+		633145F82A8A1ADB009D6644 /* Highlightr */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Highlightr;
+		};
 		634D31562A86134D00500764 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */;
@@ -511,11 +548,6 @@
 		8A02F02729B63ED600BA1420 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Markdown;
-		};
-		8A8EF2A229C082720032039E /* HighlightedTextEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8A8EF2A129C082720032039E /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
-			productName = HighlightedTextEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

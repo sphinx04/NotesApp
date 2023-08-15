@@ -60,6 +60,8 @@ struct PlainTextView: View {
                 .focused($focusedField, equals: .input)
                 .keyboardToolbar {
                     TextFormatButtons(focusedField: _focusedField)
+                        .padding(.vertical)
+                        .background(.thinMaterial)
                 }
 //                .toolbar {
 //                    ToolbarItemGroup(placement: .keyboard) {

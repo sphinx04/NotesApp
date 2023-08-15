@@ -19,25 +19,13 @@ struct KeyboardToolbar<ToolbarView: View>: ViewModifier {
 
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
-            VStack {
-                GeometryReader { geometry in
-                    VStack {
-                        content
-                    }
-                    .frame(width: geometry.size.width, height: geometry.size.height - height)
+            VStack(spacing: 0) {
+                VStack {
+                    content
                 }
                 toolbarView
-                    .background(
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onChange(of: proxy.size.height, perform: { newValue in
-                                    height = newValue
-                                })
-                        }
-                    )
             }
         }
-
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

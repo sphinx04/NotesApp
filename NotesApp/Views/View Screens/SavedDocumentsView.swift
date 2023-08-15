@@ -68,8 +68,9 @@ struct SavedDocumentsView: View {
                     tabSelection = 2
                     
                 } label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "plus")
                         .font(.largeTitle)
+                        .fontWeight(.bold)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 5)

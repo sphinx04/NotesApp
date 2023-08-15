@@ -14,6 +14,8 @@
 		634D315B2A8613B800500764 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D315A2A8613B800500764 /* RealmManager.swift */; };
 		634D315D2A86151E00500764 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D315C2A86151E00500764 /* Document.swift */; };
 		63A543222A8ABD7900E45D42 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543212A8ABD7800E45D42 /* Highlightr */; };
+		63A543242A8AC90B00E45D42 /* DynamicTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543232A8AC90B00E45D42 /* DynamicTable.swift */; };
+		63A543272A8BA7F800E45D42 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543262A8BA7F800E45D42 /* MarkdownKit */; };
 		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
 		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
 		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
@@ -41,6 +43,7 @@
 /* Begin PBXFileReference section */
 		634D315A2A8613B800500764 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		634D315C2A86151E00500764 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		63A543232A8AC90B00E45D42 /* DynamicTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTable.swift; sourceTree = "<group>"; };
 		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */,
+				63A543272A8BA7F800E45D42 /* MarkdownKit in Frameworks */,
 				634D31592A86134D00500764 /* RealmSwift in Frameworks */,
 				634D31572A86134D00500764 /* Realm in Frameworks */,
 				633145F32A89FF15009D6644 /* CodeEditor in Frameworks */,
@@ -95,6 +99,7 @@
 				8A8EF2A629C1D0060032039E /* TextFormatButtons.swift */,
 				8A8EF2A429C12A340032039E /* KeyboardToolbar.swift */,
 				63DBC2A72A84E9FB009B118A /* SymbolButton.swift */,
+				63A543232A8AC90B00E45D42 /* DynamicTable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				633145F22A89FF15009D6644 /* CodeEditor */,
 				633145F82A8A1ADB009D6644 /* Highlightr */,
 				63A543212A8ABD7800E45D42 /* Highlightr */,
+				63A543262A8BA7F800E45D42 /* MarkdownKit */,
 			);
 			productName = NotesApp;
 			productReference = 8A8CDACC29ACF03500C29448 /* NotesApp.app */;
@@ -235,6 +241,7 @@
 				633145F12A89FF15009D6644 /* XCLocalSwiftPackageReference "CodeEditor-main" */,
 				633145F72A8A1ADB009D6644 /* XCLocalSwiftPackageReference "Highlightr" */,
 				63A543202A8ABD7800E45D42 /* XCLocalSwiftPackageReference "Highlightr" */,
+				63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
 			);
 			productRefGroup = 8A8CDACD29ACF03500C29448 /* Products */;
 			projectDirPath = "";
@@ -268,6 +275,7 @@
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
 				634D315B2A8613B800500764 /* RealmManager.swift in Sources */,
 				63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */,
+				63A543242A8AC90B00E45D42 /* DynamicTable.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
 				63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */,
 				634D315D2A86151E00500764 /* Document.swift in Sources */,
@@ -518,6 +526,14 @@
 				kind = branch;
 			};
 		};
+		63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bmoliveira/MarkdownKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -542,6 +558,11 @@
 		63A543212A8ABD7800E45D42 /* Highlightr */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Highlightr;
+		};
+		63A543262A8BA7F800E45D42 /* MarkdownKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
+			productName = MarkdownKit;
 		};
 		8A02F02729B63ED600BA1420 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;

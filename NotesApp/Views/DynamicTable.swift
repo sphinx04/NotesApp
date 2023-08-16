@@ -8,6 +8,35 @@
 import SwiftUI
 import MarkdownKit
 
+
+struct DeleteButton: View {
+    var action: () -> Void
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: "trash")
+                .foregroundColor(.red)
+        }
+        .padding(.horizontal, 5)
+    }
+}
+
+struct AddButton: View {
+    var action: () -> Void
+
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: "plus")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundStyle(.green)
+        }
+    }
+}
+
 struct DynamicTable: View {
     @State private var cellData: [[String]] = [
         ["", ""],
@@ -18,34 +47,6 @@ struct DynamicTable: View {
     var selectedString: String = ""
 
     var completion: ((String) -> Void)
-
-    func addRow() {
-        withAnimation {
-            cellData.append(Array(repeating: "", count: cellData[0].count))
-        }
-    }
-
-    func addColumn() {
-        withAnimation {
-            for rowIndex in 0..<cellData.count {
-                cellData[rowIndex].append("")
-            }
-        }
-    }
-
-    func deleteRow(at index: Int) {
-        cellData.remove(at: index)
-    }
-
-
-    func deleteColumn(at index: Int) {
-        withAnimation {
-            for rowIndex in 0..<cellData.count {
-                cellData[rowIndex].remove(at: index)
-            }
-        }
-    }
-
     
     var body: some View {
         VStack {
@@ -56,25 +57,17 @@ struct DynamicTable: View {
                             ForEach(0..<cellData.count, id: \.self) { rowIndex in
                                 HStack(alignment: .lastTextBaseline) {
                                     if cellData.count > 1 {
-                                        Button {
-                                            deleteRow(at: rowIndex)
-                                        } label: {
-                                            Image(systemName: "trash")
-                                                .foregroundColor(.red)
+                                        DeleteButton {
+                                            cellData.deleteRow(at: rowIndex)
                                         }
-                                        .padding(.horizontal, 5)
                                     }
                                     
                                     ForEach(0..<cellData[rowIndex].count, id: \.self) { columnIndex in
                                         VStack {
                                             if rowIndex == 0 && cellData[rowIndex].count > 1 {
-                                                Button {
-                                                    deleteColumn(at: columnIndex)
-                                                } label: {
-                                                    Image(systemName: "trash")
-                                                        .foregroundColor(.red)
+                                                DeleteButton {
+                                                    cellData.deleteColumn(at: columnIndex)
                                                 }
-                                                .padding(.horizontal, 5)
                                             }
                                             
                                             TextField("Enter text", text: $cellData[rowIndex][columnIndex])
@@ -85,22 +78,12 @@ struct DynamicTable: View {
                                     }
                                 }
                             } //FOREACH
-                            Button {
-                                addRow()
-                            } label: {
-                                Image(systemName: "plus")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.green)
+                            AddButton {
+                                cellData.addRow()
                             }
                         }
-                        Button {
-                            addColumn()
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.green)
+                        AddButton {
+                            cellData.addColumn()
                         }
                     } //HSTACK
                     .padding()
@@ -125,8 +108,32 @@ struct DynamicTable: View {
     }
 }
 
+extension [[String]] {
+    mutating func addRow() {
+        self.append(Array<String>(repeating: "", count: self[0].count))
+    }
+
+    mutating func addColumn() {
+        for rowIndex in 0..<self.count {
+            self[rowIndex].append("")
+        }
+    }
+
+    mutating func deleteRow(at index: Int) {
+        self.remove(at: index)
+    }
+
+
+    mutating func deleteColumn(at index: Int) {
+        for rowIndex in 0..<self.count {
+            self[rowIndex].remove(at: index)
+        }
+    }
+}
+
 #if DEBUG
 #Preview {
     DynamicTable() { str in print(str) }
 }
 #endif
+

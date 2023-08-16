@@ -19,9 +19,9 @@ func saveToFile(_ str: String, fileName: String, format: String) -> URL {
     return url
 }
 
-func saveToPDF(_ webView: WKWebView, rect: CGRect) -> URL {
+func saveToPDF(_ webView: WKWebView, rect: CGRect, fileName: String) -> URL {
     let pdfData = webView.createPDFData(rect: rect)
-    let url = getDocumentsDirectory().appendingPathComponent("output.pdf")
+    let url = getDocumentsDirectory().appendingPathComponent(fileName)
     do {
         try pdfData.write(to: url)
     } catch {

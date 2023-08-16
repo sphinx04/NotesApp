@@ -61,11 +61,6 @@ struct PlainTextView: View {
                     TextFormatButtons(dataModel: dataModel, focusedField: _focusedField)
                         .background(.thinMaterial)
                 }
-//                .toolbar {
-//                    ToolbarItemGroup(placement: .keyboard) {
-//                        TextFormatButtons(focusedField: _focusedField)
-//                    }
-//                }
                 .onAppear {
                     print("text editor visible")
                     // dataModel = DataStorageModel()

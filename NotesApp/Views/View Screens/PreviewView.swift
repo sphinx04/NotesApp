@@ -82,12 +82,12 @@ struct PreviewView: View {
                     Image(systemName: "doc.richtext")
                 }
 
-                ShareLink(item: saveToFile(dataModel.currentText, fileName: "output", format: ".md")) {
+                ShareLink(item: saveToFile(dataModel.currentText, fileName: dataModel.currentName, format: ".md")) {
                     Text("Export .md")
                     Image(systemName: "doc.text")
                 }
 
-                ShareLink(item: saveToFile(HTML, fileName: "output", format: ".html")) {
+                ShareLink(item: saveToFile(HTML, fileName: dataModel.currentName, format: ".html")) {
                     Text("Export HTML")
                     Image(systemName: "square")
                 }
@@ -117,7 +117,7 @@ struct PreviewView: View {
                             HTML = html as! String
                             let rect = CGRect(x: 0, y: 0, width: 595.2 * 2, height: 841.8 * 2)
                             shareURL = saveToPDF(markdownWebView.webview,
-                                            rect: rect)
+                                                 rect: rect, fileName: dataModel.currentName)
                             markdownWebView.webview.changeFontSize(to: fontSize)
                         }
                     }

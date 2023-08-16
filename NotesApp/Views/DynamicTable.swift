@@ -43,70 +43,79 @@ struct DynamicTable: View {
         ["", ""],
         ["", ""]
     ]
-
+    
     var selectedString: String = ""
-
+    
     var completion: ((String) -> Void)
     
     var body: some View {
         VStack {
-            VStack {
-                ScrollView([.horizontal, .vertical]) {
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading) {
-                            ForEach(0..<cellData.count, id: \.self) { rowIndex in
-                                HStack(alignment: .lastTextBaseline) {
-                                    if cellData.count > 1 {
-                                        DeleteButton {
-                                            cellData.deleteRow(at: rowIndex)
-                                        }
-                                    }
-                                    
-                                    ForEach(0..<cellData[rowIndex].count, id: \.self) { columnIndex in
-                                        VStack {
-                                            if rowIndex == 0 && cellData[rowIndex].count > 1 {
-                                                DeleteButton {
-                                                    cellData.deleteColumn(at: columnIndex)
-                                                }
-                                            }
-                                            
-                                            TextField("Enter text", text: $cellData[rowIndex][columnIndex])
-                                                .padding(5)
-                                                .background(RoundedRectangle(cornerRadius: 5).fill(.thickMaterial))
-                                                .fontWeight(rowIndex == 0 ? .bold : .regular)
-                                        }
-                                    }
-                                }
-                            } //FOREACH
-                            AddButton {
-                                cellData.addRow()
-                            }
-                        }
-                        AddButton {
-                            cellData.addColumn()
-                        }
-                    } //HSTACK
-                    .padding()
-                } //SCROLLVIEW
-            } //VSTACK
-            .padding()
-            
-            Button("Generate .md table") {
-                let markdown = MarkdownParser.generateMdTable(from: cellData)
-                print("md table:", markdown)
-                completion(markdown)
-            }
-            .padding()
-            .buttonStyle(.borderedProminent)
-            
-        }
+            ScrollView([.horizontal, .vertical]) {
+                TableHeaderView(cellData: $cellData)
+            } //SCROLLVIEW
+        } //VSTACK
         .onAppear {
             if !selectedString.isEmpty {
                 cellData = MarkdownParser.parseMarkdownTable(selectedString)
             }
         }
+        .padding()
+        
+        Button("Generate .md table") {
+            let markdown = MarkdownParser.generateMdTable(from: cellData)
+            print("md table:", markdown)
+            completion(markdown)
+        }
+        .padding()
+        .buttonStyle(.borderedProminent)
     }
 }
+
+struct TableHeaderView: View {
+    @Binding var cellData: [[String]]
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading) {
+                ForEach(0..<cellData.count, id: \.self) { rowIndex in
+                    HStack(alignment: .lastTextBaseline) {
+                        if cellData.count > 1 {
+                            DeleteButton {
+                                cellData.deleteRow(at: rowIndex)
+                            }
+                        }
+                        ForEach(0..<cellData[rowIndex].count, id: \.self) { columnIndex in
+                            VStack {
+                                if rowIndex == 0 && cellData[rowIndex].count > 1 {
+                                    Button {
+                                        cellData.deleteColumn(at: columnIndex)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.red)
+                                    }
+                                    .padding(.horizontal, 5)
+                                }
+
+                                TextField("Enter text", text: $cellData[rowIndex][columnIndex])
+                                    .padding(5)
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.thickMaterial))
+                                    .fontWeight(rowIndex == 0 ? .bold : .regular)
+                            }
+                        }
+                    }
+                } //FOREACH
+                AddButton {
+                    cellData.addRow()
+                }
+            }
+            AddButton {
+                cellData.addColumn()
+            }
+        } //HSTACK
+        .padding()
+    }
+}
+
 
 extension [[String]] {
     mutating func addRow() {

@@ -15,7 +15,7 @@ struct DocumentView: View {
     var duplicateAction: () -> Void
     var deleteAction: () -> Void
     var scaleMultiplier = 0.5
-    @State private var fontSize: CGFloat = 0.1
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     init(_ document: Document,
          fontSizeMultiplyer: Double,
@@ -46,16 +46,18 @@ struct DocumentView: View {
         VStack {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .light ? .white : .black)
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
-                    .strokeBorder(.black, lineWidth: 0.2)
-                    .foregroundColor(.white)
-                
-                Text(document.text)
-                    .padding(30 * fontSizeMultiplyer)
-                    .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
-                    .foregroundColor(.black)
-                    .zIndex(80)
+                    .strokeBorder(.gray, lineWidth: 0.3)
+                    .foregroundColor(colorScheme == .light ? .white : .black)
+                Markdown(content: .constant(document.text), theme: .light)
+                    .padding(20 * fontSizeMultiplyer)
+                    .allowsHitTesting(false)
+//                Text(document.text)
+//                    .padding(30 * fontSizeMultiplyer)
+//                    .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
+//                    .foregroundColor(.black)
+//                    .zIndex(80)
 
             } //ZSTACK
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))

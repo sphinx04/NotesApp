@@ -14,6 +14,9 @@ import WebKit
 class DataStorageModel: ObservableObject {
     @State var realmManager: RealmManager
 
+
+    @Published var selection: Range<String.Index>
+
     @Published var currentText = ""
     @Published var currentName = ""
 
@@ -28,6 +31,7 @@ class DataStorageModel: ObservableObject {
 
     init(realmManager: RealmManager) {
         currentDocumentId = ObjectId()
+        self.selection = String().endIndex..<String().endIndex
         self.realmManager = realmManager
         if self.realmManager.documents.isEmpty {
             let name = "Welcome"

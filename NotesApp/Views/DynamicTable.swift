@@ -14,13 +14,8 @@ struct DynamicTable: View {
         ["", ""],
         ["", ""]
     ]
-    @State private var string = """
-| Name     | Age | Occupation   |
-|----------|-----|--------------|
-| John     | 30  | Developer    |
-| Jane     | 25  | Designer     |
-"""
-    @State var fromString: Bool = false
+
+    var selectedString: String = ""
 
     var completion: ((String) -> Void)
 
@@ -60,32 +55,6 @@ struct DynamicTable: View {
             }
             print(cellData)
 
-
-//            let headerCells = headerLine
-//                .replacingOccurrences(of: "|", with: "")
-//                .split(separator: "|")
-//                .map { String($0.trimmingCharacters(in: .whitespaces)) }
-//
-//            let separatorCells = separatorLine
-//                .replacingOccurrences(of: "|", with: "")
-//                .split(separator: "|")
-//                .map { String($0.trimmingCharacters(in: .whitespaces)) }
-//
-//            if headerCells.count == separatorCells.count {
-//                cellData.append(headerCells)
-//
-//                for rowIndex in 2..<lines.count {
-//                    let dataLine = lines[rowIndex]
-//                    let dataCells = dataLine
-//                        .replacingOccurrences(of: "|", with: "")
-//                        .split(separator: "|")
-//                        .map { String($0.trimmingCharacters(in: .whitespaces)) }
-//
-//                    if dataCells.count == headerCells.count {
-//                        cellData.append(dataCells)
-//                    }
-//                }
-//            }
         }
     }
     func generateMarkdownFromCellData() -> String {
@@ -145,25 +114,8 @@ struct DynamicTable: View {
 
     
     var body: some View {
-        if fromString {
+        VStack {
             VStack {
-                TextEditor(text: $string)
-                    .monospaced()
-                    .padding()
-                Button {
-                    parseMarkdownTable(string)
-                    fromString = false
-                } label: {
-                    Text("Load")
-                }
-                .padding()
-                .buttonStyle(.borderedProminent)
-
-            }
-        } else {
-            VStack {
-                Spacer()
-                
                 ScrollView([.horizontal, .vertical]) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
@@ -224,16 +176,23 @@ struct DynamicTable: View {
             
             Button("Generate .md table") {
                 let markdown = generateMarkdownFromCellData()
+                print("md table:", markdown)
                 completion(markdown)
             }
             .padding()
             .buttonStyle(.borderedProminent)
+            
+        }
+        .onAppear {
+            if !selectedString.isEmpty {
+                parseMarkdownTable(selectedString)
+            }
         }
     }
 }
 
 #if DEBUG
 #Preview {
-    DynamicTable(fromString: true) { str in print(str) }
+    DynamicTable() { str in print(str) }
 }
 #endif

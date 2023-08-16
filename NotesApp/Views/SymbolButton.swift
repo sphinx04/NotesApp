@@ -11,12 +11,15 @@ struct SymbolButton: View {
     let symbol: String
 
     var body: some View {
-        Button(symbol) {
-        let inputController = UIInputViewController()
-        inputController.textDocumentProxy.insertText(symbol)
-    }
-    .buttonStyle(.bordered)
-    .padding(.horizontal, 5)
+        Button {
+            let inputController = UIInputViewController()
+            inputController.textDocumentProxy.insertText(symbol)
+        } label: {
+            Text(symbol)
+                .font(.largeTitle)
+        }
+        .buttonStyle(.bordered)
+        .padding(.horizontal, 1)
     }
 }
 

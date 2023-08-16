@@ -19,71 +19,6 @@ struct DynamicTable: View {
 
     var completion: ((String) -> Void)
 
-    func parseMarkdownTable(_ markdown: String) {
-        cellData.removeAll()
-
-        print(markdown)
-
-        var lines = markdown.split(separator: "\n")
-
-        lines.removeAll(where: {$0.isEmpty})
-
-        print("Lines:")
-        if lines.count >= 3 {
-            var headerLine = lines[0].split(separator: "|")
-            for i in 0..<headerLine.count {
-                while headerLine[i].first == " " {
-                    headerLine[i] = headerLine[i].dropFirst()
-                }
-                while headerLine[i].last == " " {
-                    headerLine[i] = headerLine[i].dropLast()
-                }
-            }
-            cellData.append(headerLine.map({ String($0) }))
-
-            for i in 2..<lines.count {
-                var bodyLine = lines[i].split(separator: "|")
-                for i in 0..<bodyLine.count {
-                    while bodyLine[i].first == " " {
-                        bodyLine[i] = bodyLine[i].dropFirst()
-                    }
-                    while bodyLine[i].last == " " {
-                        bodyLine[i] = bodyLine[i].dropLast()
-                    }
-                }
-                cellData.append(bodyLine.map({ String($0) }))
-            }
-            print(cellData)
-
-        }
-    }
-    func generateMarkdownFromCellData() -> String {
-        var markdownString = ""
-        
-        let columnWidths: [Int] = (0..<cellData[0].count).map { columnIndex in
-            cellData.map { $0[columnIndex].count }.max() ?? 0
-        }
-        
-        for (rowIndex, row) in cellData.enumerated() {
-            markdownString += "|"
-            for (columnIndex, width) in columnWidths.enumerated() {
-                let cellContent = row[columnIndex].padding(toLength: width == 0 ? 1 : width, withPad: " ", startingAt: 0)
-                markdownString += " \(cellContent) |"
-            }
-            markdownString += "\n"
-            
-            if rowIndex == 0 {
-                markdownString += "|"
-                for (_, width) in columnWidths.enumerated() {
-                    markdownString += " \(String(repeating: "-", count: width == 0 ? 1 : width)) |"
-                }
-                markdownString += "\n"
-            }
-        }
-        
-        return markdownString
-    }
-
     func addRow() {
         withAnimation {
             cellData.append(Array(repeating: "", count: cellData[0].count))
@@ -99,10 +34,9 @@ struct DynamicTable: View {
     }
 
     func deleteRow(at index: Int) {
-        withAnimation {
-            cellData.remove(at: index)
-        }
+        cellData.remove(at: index)
     }
+
 
     func deleteColumn(at index: Int) {
         withAnimation {
@@ -175,7 +109,7 @@ struct DynamicTable: View {
             .padding()
             
             Button("Generate .md table") {
-                let markdown = generateMarkdownFromCellData()
+                let markdown = MarkdownParser.generateMdTable(from: cellData)
                 print("md table:", markdown)
                 completion(markdown)
             }
@@ -185,7 +119,7 @@ struct DynamicTable: View {
         }
         .onAppear {
             if !selectedString.isEmpty {
-                parseMarkdownTable(selectedString)
+                cellData = MarkdownParser.parseMarkdownTable(selectedString)
             }
         }
     }

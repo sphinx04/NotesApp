@@ -26,7 +26,7 @@ final class MarkdownParser {
 
     static private func removeRowsWithInsufficientColumns(from array: [[String]]) -> [[String]] {
         let maxColumns = maxColumnCount(array)
-        let filteredArray = array.filter { $0.count > maxColumns }
+        let filteredArray = array.filter { $0.count == maxColumns }
         return filteredArray
     }
 

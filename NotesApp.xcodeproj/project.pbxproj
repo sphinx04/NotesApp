@@ -19,6 +19,9 @@
 		63A543292A8CFD1A00E45D42 /* AddTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543282A8CFD1A00E45D42 /* AddTableView.swift */; };
 		63A5432B2A8D016000E45D42 /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5432A2A8D016000E45D42 /* MarkdownParser.swift */; };
 		63A5432D2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5432C2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift */; };
+		63A543302A8D2E0700E45D42 /* ChatGPTSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */; };
+		63A543332A8D2E3F00E45D42 /* ChatGPTSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543322A8D2E3F00E45D42 /* ChatGPTSwift */; };
+		63A543352A8DE9B200E45D42 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543342A8DE9B200E45D42 /* ApiKeys.swift */; };
 		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
 		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
 		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
@@ -50,6 +53,7 @@
 		63A543282A8CFD1A00E45D42 /* AddTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableView.swift; sourceTree = "<group>"; };
 		63A5432A2A8D016000E45D42 /* MarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownParser.swift; sourceTree = "<group>"; };
 		63A5432C2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDocumentsHeaderView.swift; sourceTree = "<group>"; };
+		63A543342A8DE9B200E45D42 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -81,9 +85,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */,
+				63A543332A8D2E3F00E45D42 /* ChatGPTSwift in Frameworks */,
 				63A543272A8BA7F800E45D42 /* MarkdownKit in Frameworks */,
 				634D31592A86134D00500764 /* RealmSwift in Frameworks */,
 				634D31572A86134D00500764 /* Realm in Frameworks */,
+				63A543302A8D2E0700E45D42 /* ChatGPTSwift in Frameworks */,
 				633145F32A89FF15009D6644 /* CodeEditor in Frameworks */,
 				63A543222A8ABD7900E45D42 /* Highlightr in Frameworks */,
 				8A02F02829B63ED600BA1420 /* Markdown in Frameworks */,
@@ -180,6 +186,7 @@
 				8A8CDAD329ACF03700C29448 /* Assets.xcassets */,
 				8A8CDAD529ACF03700C29448 /* Preview Content */,
 				8A8CDAE029ACF12300C29448 /* markdown */,
+				63A543342A8DE9B200E45D42 /* ApiKeys.swift */,
 			);
 			path = NotesApp;
 			sourceTree = "<group>";
@@ -216,6 +223,8 @@
 				633145F82A8A1ADB009D6644 /* Highlightr */,
 				63A543212A8ABD7800E45D42 /* Highlightr */,
 				63A543262A8BA7F800E45D42 /* MarkdownKit */,
+				63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */,
+				63A543322A8D2E3F00E45D42 /* ChatGPTSwift */,
 			);
 			productName = NotesApp;
 			productReference = 8A8CDACC29ACF03500C29448 /* NotesApp.app */;
@@ -251,6 +260,8 @@
 				633145F72A8A1ADB009D6644 /* XCLocalSwiftPackageReference "Highlightr" */,
 				63A543202A8ABD7800E45D42 /* XCLocalSwiftPackageReference "Highlightr" */,
 				63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
+				63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
+				63A543312A8D2E3F00E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
 			);
 			productRefGroup = 8A8CDACD29ACF03500C29448 /* Products */;
 			projectDirPath = "";
@@ -286,6 +297,7 @@
 				63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */,
 				63A543242A8AC90B00E45D42 /* DynamicTable.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
+				63A543352A8DE9B200E45D42 /* ApiKeys.swift in Sources */,
 				63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */,
 				634D315D2A86151E00500764 /* Document.swift in Sources */,
 				8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */,
@@ -546,6 +558,22 @@
 				minimumVersion = 1.7.1;
 			};
 		};
+		63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/ChatGPTSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+		63A543312A8D2E3F00E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/ChatGPTSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -575,6 +603,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
 			productName = MarkdownKit;
+		};
+		63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */;
+			productName = ChatGPTSwift;
+		};
+		63A543322A8D2E3F00E45D42 /* ChatGPTSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63A543312A8D2E3F00E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */;
+			productName = ChatGPTSwift;
 		};
 		8A02F02729B63ED600BA1420 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;

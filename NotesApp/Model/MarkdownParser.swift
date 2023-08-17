@@ -21,7 +21,21 @@ final class MarkdownParser {
                 cellData.append(bodyLine)
             }
         }
-        return cellData
+        return removeRowsWithInsufficientColumns(from: cellData)
+    }
+
+    static private func removeRowsWithInsufficientColumns(from array: [[String]]) -> [[String]] {
+        let maxColumns = maxColumnCount(array)
+        let filteredArray = array.filter { $0.count > maxColumns }
+        return filteredArray
+    }
+
+    static private func maxColumnCount(_ array: [[String]]) -> Int {
+        var maxColumns = 0
+        for row in array {
+            maxColumns = max(maxColumns, row.count)
+        }
+        return maxColumns
     }
 
     static private func parseLine(_ line: Substring) -> [String] {
@@ -29,7 +43,7 @@ final class MarkdownParser {
         let cells = line.split(separator: "|")
 
         for cell in cells {
-            var cleanedCell = removeFirstAndLastSpace(cell)
+            let cleanedCell = removeFirstAndLastSpace(cell)
             parsedLine.append(String(cleanedCell))
         }
 

@@ -9,20 +9,17 @@
 /* Begin PBXBuildFile section */
 		633145F32A89FF15009D6644 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 633145F22A89FF15009D6644 /* CodeEditor */; };
 		633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 633145F82A8A1ADB009D6644 /* Highlightr */; };
-		634D31572A86134D00500764 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 634D31562A86134D00500764 /* Realm */; };
-		634D31592A86134D00500764 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 634D31582A86134D00500764 /* RealmSwift */; };
-		634D315B2A8613B800500764 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D315A2A8613B800500764 /* RealmManager.swift */; };
-		634D315D2A86151E00500764 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D315C2A86151E00500764 /* Document.swift */; };
 		63A543222A8ABD7900E45D42 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543212A8ABD7800E45D42 /* Highlightr */; };
 		63A543242A8AC90B00E45D42 /* DynamicTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543232A8AC90B00E45D42 /* DynamicTable.swift */; };
 		63A543272A8BA7F800E45D42 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543262A8BA7F800E45D42 /* MarkdownKit */; };
 		63A543292A8CFD1A00E45D42 /* AddTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543282A8CFD1A00E45D42 /* AddTableView.swift */; };
 		63A5432B2A8D016000E45D42 /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5432A2A8D016000E45D42 /* MarkdownParser.swift */; };
 		63A5432D2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5432C2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift */; };
-		63A543302A8D2E0700E45D42 /* ChatGPTSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */; };
 		63A543332A8D2E3F00E45D42 /* ChatGPTSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A543322A8D2E3F00E45D42 /* ChatGPTSwift */; };
 		63A543352A8DE9B200E45D42 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A543342A8DE9B200E45D42 /* ApiKeys.swift */; };
-		63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */; };
+		63C25CD42A98DA5E002C0BE2 /* DocumentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C25CD32A98DA5E002C0BE2 /* DocumentTabView.swift */; };
+		63C63E5D2A95F511001FF5F9 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63C63E5B2A95F511001FF5F9 /* Main.xcdatamodeld */; };
+		63C63E5F2A95F893001FF5F9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C63E5E2A95F893001FF5F9 /* DataController.swift */; };
 		63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */; };
 		63D677412A82F5BB006F9EC4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D677402A82F5BB006F9EC4 /* PreviewView.swift */; };
 		63DBC2A82A84E9FB009B118A /* SymbolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DBC2A72A84E9FB009B118A /* SymbolButton.swift */; };
@@ -47,14 +44,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		634D315A2A8613B800500764 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		634D315C2A86151E00500764 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		63A543232A8AC90B00E45D42 /* DynamicTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTable.swift; sourceTree = "<group>"; };
 		63A543282A8CFD1A00E45D42 /* AddTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableView.swift; sourceTree = "<group>"; };
 		63A5432A2A8D016000E45D42 /* MarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownParser.swift; sourceTree = "<group>"; };
 		63A5432C2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDocumentsHeaderView.swift; sourceTree = "<group>"; };
 		63A543342A8DE9B200E45D42 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
-		63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsExplorerView.swift; sourceTree = "<group>"; };
+		63C25CD32A98DA5E002C0BE2 /* DocumentTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTabView.swift; sourceTree = "<group>"; };
+		63C63E5C2A95F511001FF5F9 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
+		63C63E5E2A95F893001FF5F9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		63D677402A82F5BB006F9EC4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		63DBC2A72A84E9FB009B118A /* SymbolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolButton.swift; sourceTree = "<group>"; };
@@ -87,9 +84,6 @@
 				633145F92A8A1ADB009D6644 /* Highlightr in Frameworks */,
 				63A543332A8D2E3F00E45D42 /* ChatGPTSwift in Frameworks */,
 				63A543272A8BA7F800E45D42 /* MarkdownKit in Frameworks */,
-				634D31592A86134D00500764 /* RealmSwift in Frameworks */,
-				634D31572A86134D00500764 /* Realm in Frameworks */,
-				63A543302A8D2E0700E45D42 /* ChatGPTSwift in Frameworks */,
 				633145F32A89FF15009D6644 /* CodeEditor in Frameworks */,
 				63A543222A8ABD7900E45D42 /* Highlightr in Frameworks */,
 				8A02F02829B63ED600BA1420 /* Markdown in Frameworks */,
@@ -122,7 +116,7 @@
 			children = (
 				8A2B736A29AFD372005AA038 /* SavedDocumentsView.swift */,
 				8A8CDAD129ACF03500C29448 /* ContentView.swift */,
-				63D6773C2A82F59A006F9EC4 /* DocumentsExplorerView.swift */,
+				63C25CD32A98DA5E002C0BE2 /* DocumentTabView.swift */,
 				63D6773E2A82F5AA006F9EC4 /* PlainTextView.swift */,
 				63D677402A82F5BB006F9EC4 /* PreviewView.swift */,
 				63A5432C2A8D25FA00E45D42 /* SavedDocumentsHeaderView.swift */,
@@ -133,10 +127,10 @@
 		63D677422A836B9C006F9EC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				634D315A2A8613B800500764 /* RealmManager.swift */,
 				8A02F02529B61AE400BA1420 /* DataStorageModel.swift */,
+				63C63E5E2A95F893001FF5F9 /* DataController.swift */,
+				63C63E5B2A95F511001FF5F9 /* Main.xcdatamodeld */,
 				8AAE444F29AE076D00CB855C /* ExportFile.swift */,
-				634D315C2A86151E00500764 /* Document.swift */,
 				63A5432A2A8D016000E45D42 /* MarkdownParser.swift */,
 			);
 			path = Model;
@@ -217,13 +211,10 @@
 			name = NotesApp;
 			packageProductDependencies = (
 				8A02F02729B63ED600BA1420 /* Markdown */,
-				634D31562A86134D00500764 /* Realm */,
-				634D31582A86134D00500764 /* RealmSwift */,
 				633145F22A89FF15009D6644 /* CodeEditor */,
 				633145F82A8A1ADB009D6644 /* Highlightr */,
 				63A543212A8ABD7800E45D42 /* Highlightr */,
 				63A543262A8BA7F800E45D42 /* MarkdownKit */,
-				63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */,
 				63A543322A8D2E3F00E45D42 /* ChatGPTSwift */,
 			);
 			productName = NotesApp;
@@ -255,12 +246,9 @@
 			);
 			mainGroup = 8A8CDAC329ACF03500C29448;
 			packageReferences = (
-				634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				633145F12A89FF15009D6644 /* XCLocalSwiftPackageReference "CodeEditor-main" */,
 				633145F72A8A1ADB009D6644 /* XCLocalSwiftPackageReference "Highlightr" */,
-				63A543202A8ABD7800E45D42 /* XCLocalSwiftPackageReference "Highlightr" */,
 				63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
-				63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
 				63A543312A8D2E3F00E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
 			);
 			productRefGroup = 8A8CDACD29ACF03500C29448 /* Products */;
@@ -293,14 +281,14 @@
 				8A8EF2A529C12A340032039E /* KeyboardToolbar.swift in Sources */,
 				8A2B736929AF9254005AA038 /* TopBarButtonModifier.swift in Sources */,
 				8A8CDAD229ACF03500C29448 /* ContentView.swift in Sources */,
-				634D315B2A8613B800500764 /* RealmManager.swift in Sources */,
-				63D6773D2A82F59A006F9EC4 /* DocumentsExplorerView.swift in Sources */,
 				63A543242A8AC90B00E45D42 /* DynamicTable.swift in Sources */,
 				8A2B736B29AFD373005AA038 /* SavedDocumentsView.swift in Sources */,
 				63A543352A8DE9B200E45D42 /* ApiKeys.swift in Sources */,
+				63C63E5D2A95F511001FF5F9 /* Main.xcdatamodeld in Sources */,
+				63C25CD42A98DA5E002C0BE2 /* DocumentTabView.swift in Sources */,
 				63D6773F2A82F5AA006F9EC4 /* PlainTextView.swift in Sources */,
-				634D315D2A86151E00500764 /* Document.swift in Sources */,
 				8AAE445029AE076E00CB855C /* ExportFile.swift in Sources */,
+				63C63E5F2A95F893001FF5F9 /* DataController.swift in Sources */,
 				8A02F02629B61AE400BA1420 /* DataStorageModel.swift in Sources */,
 				8AAE445229AE0BC500CB855C /* ViewExtensions.swift in Sources */,
 				8A2B736329AF5F9F005AA038 /* ExportFileButtonView.swift in Sources */,
@@ -535,35 +523,15 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Highlightr;
 		};
-		63A543202A8ABD7800E45D42 /* XCLocalSwiftPackageReference "Highlightr" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Highlightr;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bmoliveira/MarkdownKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.7.1;
-			};
-		};
-		63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alfianlosari/ChatGPTSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
 			};
 		};
 		63A543312A8D2E3F00E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */ = {
@@ -585,16 +553,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Highlightr;
 		};
-		634D31562A86134D00500764 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		634D31582A86134D00500764 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 634D31552A86134C00500764 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		63A543212A8ABD7800E45D42 /* Highlightr */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Highlightr;
@@ -603,11 +561,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63A543252A8BA7F800E45D42 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
 			productName = MarkdownKit;
-		};
-		63A5432F2A8D2E0700E45D42 /* ChatGPTSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 63A5432E2A8D2E0700E45D42 /* XCRemoteSwiftPackageReference "ChatGPTSwift" */;
-			productName = ChatGPTSwift;
 		};
 		63A543322A8D2E3F00E45D42 /* ChatGPTSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -619,6 +572,19 @@
 			productName = Markdown;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		63C63E5B2A95F511001FF5F9 /* Main.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				63C63E5C2A95F511001FF5F9 /* Main.xcdatamodel */,
+			);
+			currentVersion = 63C63E5C2A95F511001FF5F9 /* Main.xcdatamodel */;
+			path = Main.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8A8CDAC429ACF03500C29448 /* Project object */;
 }

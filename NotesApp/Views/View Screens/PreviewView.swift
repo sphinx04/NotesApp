@@ -11,73 +11,65 @@ import Markdown
 struct PreviewView: View {
     @ObservedObject var dataModel: DataStorageModel
     @State private var markdownWebView = MarkdownWebView()
-    @State private var isLoading = true
-//    @State private var currentText = ""
     @State private var isShareSheetPresented = false
-    @State private var shareURL: URL?
+//    @State private var shareURL: URL?
     @State private var fontSize = 16
     @State private var HTML = ""
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            ZStack {
-                VStack(spacing: 0) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        HStack {
-                            Button {
-                                withAnimation {
-                                    if fontSize > 8 {
-                                        fontSize -= 1
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "minus")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Picker("Font size:", selection: $fontSize) {
-                                ForEach(0..<73) { value in
-                                    if value >= 8 {
-                                        Text(String(value))
-                                    }
+            ZStack(alignment: .bottom) {
+                dataModel.currentPreview
+                HStack(alignment: .center) {
+                    Spacer()
+                    HStack {
+                        Button {
+                            withAnimation {
+                                if fontSize > 8 {
+                                    fontSize -= 1
                                 }
                             }
-                            .pickerStyle(.wheel)
-                            .frame(width: 100)
-                            .onChange(of: fontSize) { _ in
-                                markdownWebView.webview.changeFontSize(to: fontSize)
-                            }
-                            
-                            Button {
-                                withAnimation {
-                                    if fontSize < 72 {
-                                        fontSize += 1
-                                    }
+                        } label: {
+                            Image(systemName: "minus")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Picker("Font size:", selection: $fontSize) {
+                            ForEach(0..<73) { value in
+                                if value >= 8 {
+                                    Text(String(value))
                                 }
-                            } label: {
-                                Image(systemName: "plus")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
                             }
                         }
-                        Spacer()
+                        .pickerStyle(.wheel)
+                        .frame(width: 100)
+                        .onChange(of: fontSize) { _ in
+                            markdownWebView.webview.changeFontSize(to: fontSize)
+                        }
+                        
+                        Button {
+                            withAnimation {
+                                if fontSize < 72 {
+                                    fontSize += 1
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                        }
                     }
-                    .padding(.horizontal)
-                    .frame(height: 50)
-                    
-                    dataModel.currentPreview
-                        .opacity(isLoading ? 0 : 1)
+                    Spacer()
                 }
-                if isLoading {
-                    ProgressView()
-                        .font(.largeTitle)
-                }
+                .padding(.horizontal)
+                .frame(height: 50)
             } //ZSTACK
 
             Menu {
-                ShareLink(item: shareURL ?? URL(fileURLWithPath: "")) {
+                ShareLink(item: saveToPDF(markdownWebView.webview,
+                                          rect: CGRect(x: 0, y: 0, width: 595.2 * 2, height: 841.8 * 2),
+                                          fileName: dataModel.currentName)) {
                     Text("Export PDF")
                     Image(systemName: "doc.richtext")
                 }
@@ -100,8 +92,7 @@ struct PreviewView: View {
         }
         
         .onAppear {
-            isLoading = true
-            dataModel.currentPreview = Markdown(content: $dataModel.currentText)
+//            dataModel.currentPreview = Markdown(content: $dataModel.currentText)
             asyncInit()
         }
     }
@@ -112,12 +103,8 @@ struct PreviewView: View {
                 DispatchQueue.main.async {
                     markdownWebView = webView
                     withAnimation {
-                        isLoading = false
                         markdownWebView.webview.evaluateJavaScript("document.documentElement.outerHTML.toString()") { html, _ in
                             HTML = html as! String
-                            let rect = CGRect(x: 0, y: 0, width: 595.2 * 2, height: 841.8 * 2)
-                            shareURL = saveToPDF(markdownWebView.webview,
-                                                 rect: rect, fileName: dataModel.currentName)
                             markdownWebView.webview.changeFontSize(to: fontSize)
                         }
                     }

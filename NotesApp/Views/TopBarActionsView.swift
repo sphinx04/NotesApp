@@ -13,28 +13,36 @@ struct TopBarActionsView: View {
     @Binding var exportFile: Bool
     @Binding var renameDocument: Bool
     @Binding var fileName: String
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         HStack {
             HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 5)
+
                 Text(fileName)
                     .font(.largeTitle)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
-                    .padding(.horizontal)
 
                 Spacer()
             }
+            .padding(.horizontal)
             .onTapGesture {
                 renameDocument = true
             }
-            .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 10))
-
-            ExportFileButtonView(exportFile: $exportFile)
-                .topBarButton()
         }
-        .background(.thickMaterial)
+        .frame(height: 60)
         .zIndex(20)
     }
 }

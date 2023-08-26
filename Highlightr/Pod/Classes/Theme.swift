@@ -290,6 +290,8 @@ open class Theme {
     {
         switch fontStyle
         {
+        case "simple":
+            return codeFont
         case "h1":
             return h1CodeFont
         case "h2":

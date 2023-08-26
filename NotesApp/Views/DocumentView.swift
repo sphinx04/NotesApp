@@ -16,7 +16,7 @@ struct DocumentView: View {
     var deleteAction: () -> Void
     var scaleMultiplier = 0.5
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
-
+    
     init(_ document: Document,
          fontSizeMultiplyer: Double,
          duplicateAction: @escaping () -> Void,
@@ -29,36 +29,35 @@ struct DocumentView: View {
     
     func getDateString(from date: Date) -> String {
         let calendar = Calendar(identifier: .gregorian)
-        var dateString = ""
         if calendar.isDateInToday(date) {
-            dateString = "Today"
+            return "Today"
         } else if calendar.isDateInYesterday(date) {
-            dateString = "Yesterday"
+            return "Yesterday"
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEEE, MMM d"
-            dateString = dateFormatter.string(from: date)
+            return dateFormatter.string(from: date)
         }
-        return dateString
     }
     
     var body: some View {
         VStack {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
-                    .foregroundColor(colorScheme == .light ? .white : .black)
+                    .foregroundColor(.white)
                 RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer)
                     .strokeBorder(.gray, lineWidth: 0.3)
-                    .foregroundColor(colorScheme == .light ? .white : .black)
-                Markdown(content: .constant(document.text), theme: .light)
+                    .foregroundColor(.white)
+                Markdown(content: .constant(document.text ?? "qweqwe"), theme: .light)
                     .padding(20 * fontSizeMultiplyer)
                     .allowsHitTesting(false)
-//                Text(document.text)
-//                    .padding(30 * fontSizeMultiplyer)
-//                    .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
-//                    .foregroundColor(.black)
-//                    .zIndex(80)
-
+                    .environment(\.colorScheme, .light)
+                //                Text(document.text)
+                //                    .padding(30 * fontSizeMultiplyer)
+                //                    .font(.system(size: 15 * fontSizeMultiplyer, weight: .medium))
+                //                    .foregroundColor(.black)
+                //                    .zIndex(80)
+                
             } //ZSTACK
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20 * fontSizeMultiplyer))
             .contextMenu {
@@ -76,12 +75,13 @@ struct DocumentView: View {
             .aspectRatio(3/4, contentMode: .fit)
             .padding([.top, .leading, .trailing])
             
-            Text(document.name)
+            Text(document.name ?? "qweqwe")
                 .font(.system(size: 14))
                 .multilineTextAlignment(.center)
                 .lineLimit(1)
-            
-            Text(getDateString(from: document.lastModified))
+                .accentColor(Color.primary)
+
+            Text(getDateString(from: document.lastModified ?? Date.distantPast))
                 .font(.system(size: 10))
                 .multilineTextAlignment(.center)
                 .lineLimit(1)

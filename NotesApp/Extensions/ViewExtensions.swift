@@ -7,36 +7,39 @@
 
 import SwiftUI
 
-extension View {
-  func onAppCameToForeground(perform action: @escaping () -> Void) -> some View {
-    self.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-       action()
+extension UINavigationController: UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
     }
-  }
-
-  func onAppWentToBackground(perform action: @escaping () -> Void) -> some View {
-    self.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-      action()
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
     }
-  }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
+    }
 }
 
-extension Array: RawRepresentable where Element: Codable {
-    public init?(rawValue: String) {
-        guard let data = rawValue.data(using: .utf8),
-              let result = try? JSONDecoder().decode([Element].self, from: data)
-        else {
-            return nil
+extension Array {
+    /// Union with newElements, comparing by keyPath value and replacing old elements with new
+    /// Expected complexity ~ 3*n
+    func union<T: Hashable>(newElements: Array, byKeyPath keyPath: KeyPath<Element, T>) -> Array {
+        var copy = self
+        // Hash indices for faster replacement
+        let sample = copy.enumerated().reduce(into: [T: Index]()) { result, entry in
+            result[entry.element[keyPath: keyPath]] = entry.offset
         }
-        self = result
-    }
-
-    public var rawValue: String {
-        guard let data = try? JSONEncoder().encode(self),
-              let result = String(data: data, encoding: .utf8)
-        else {
-            return "[]"
+        copy.reserveCapacity(copy.count + newElements.count)
+        // Either replace element if it is `equal` or append to the end
+        for element in newElements {
+            if let index = sample[element[keyPath: keyPath]] {
+                copy[index] = element
+            } else {
+                copy.append(element)
+            }
         }
-        return result
+        return copy
     }
 }

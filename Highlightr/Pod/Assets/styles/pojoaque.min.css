@@ -10,7 +10,7 @@
 .hljs-doctag,
 .hljs-regexp{color:#468966}
 .hljs-title,
-.hljs-section{color:#ff0000;font-weight:bolder},
+.hljs-section{color:#0000ff},
 .hljs-built_in,
 .hljs-name{color:#ffb03b}
 .hljs-variable,
@@ -32,6 +32,7 @@
 .hljs-emphasis{font-style:italic}
 .hljs-strong{font-weight:bold}
 .hljs-code{color:#55b04a;font-style:code}
+.hljs-simple{color:#808080},
 .hljs-header1{color:#ff0000;font-style:h1},
 .hljs-header2{color:#ff4444;font-style:h2},
 .hljs-header3{color:#ff6666;font-style:h3},

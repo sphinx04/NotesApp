@@ -254,26 +254,26 @@ final class UXCodeTextView: UXTextView {
     func applyNewTheme(_ newTheme: CodeEditor.ThemeName? = nil,
                        andFontSize newSize: CGFloat) -> Bool
     {
-        // Setting the theme reloads it (i.e. makes a "copy").
-        guard let highlightr = highlightr,
-              highlightr.setTheme(to: (newTheme ?? themeName).rawValue),
-              let theme      = highlightr.theme else { return false }
-        
-        guard theme.codeFont?.pointSize != newSize else { return true }
-        
-        theme.codeFont       = theme.codeFont?      .withSize(newSize)
-        theme.boldCodeFont   = theme.boldCodeFont?  .withSize(newSize)
-        theme.italicCodeFont = theme.italicCodeFont?.withSize(newSize)
-        theme.h1CodeFont     = theme.h1CodeFont?    .withSize(newSize * 1.6)
-        theme.h2CodeFont     = theme.h2CodeFont?    .withSize(newSize * 1.4)
-        theme.h3CodeFont     = theme.h3CodeFont?    .withSize(newSize * 1.2)
-        theme.h4CodeFont     = theme.h4CodeFont?    .withSize(newSize)
-        theme.scCodeFont     = theme.scCodeFont?    .withSize(newSize)
-        theme.linkCodeFont   = theme.linkCodeFont?  .withSize(newSize)
-        theme.setCodeFont(RPFont(name: "Menlo", size: newSize)!)
-
-        self.backgroundColor = theme.themeBackgroundColor
-        if let font = theme.codeFont, font !== self.font { self.font = font }
+//        // Setting the theme reloads it (i.e. makes a "copy").
+//        guard let highlightr = highlightr,
+//              highlightr.setTheme(to: (newTheme ?? themeName).rawValue),
+//              let theme      = highlightr.theme else { return false }
+//        
+//        guard theme.codeFont?.pointSize != newSize else { return true }
+//        
+//        theme.codeFont       = theme.codeFont?      .withSize(newSize)
+//        theme.boldCodeFont   = theme.boldCodeFont?  .withSize(newSize)
+//        theme.italicCodeFont = theme.italicCodeFont?.withSize(newSize)
+//        theme.h1CodeFont     = theme.h1CodeFont?    .withSize(newSize * 1.6)
+//        theme.h2CodeFont     = theme.h2CodeFont?    .withSize(newSize * 1.4)
+//        theme.h3CodeFont     = theme.h3CodeFont?    .withSize(newSize * 1.2)
+//        theme.h4CodeFont     = theme.h4CodeFont?    .withSize(newSize)
+//        theme.scCodeFont     = theme.scCodeFont?    .withSize(newSize)
+//        theme.linkCodeFont   = theme.linkCodeFont?  .withSize(newSize)
+//        theme.setCodeFont(RPFont(name: "Menlo", size: newSize)!)
+//
+//        self.backgroundColor = theme.themeBackgroundColor
+//        if let font = theme.codeFont, font !== self.font { self.font = font }
         return true
     }
 }

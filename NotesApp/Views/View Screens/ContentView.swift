@@ -12,28 +12,17 @@ import Markdown
 let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 // swiftlint: enable force_try
 
+
 struct ContentView: View {
     @ObservedObject var dataModel: DataStorageModel
-    @State private var tabSelection = 1
 
     init() {
-        self.dataModel = DataStorageModel(realmManager: RealmManager())
-        self.tabSelection = 2
+        self.dataModel = DataStorageModel()
     }
 
     var body: some View {
-        TabView(selection: $tabSelection) {
-            DocumentsExplorerView(dataModel: dataModel, tabSelection: $tabSelection)
-                .tabItemViewModifier(label: "Saved", systemImage: "folder")
-                .tag(1)
-
-            PlainTextView(dataModel: dataModel)
-                .tabItemViewModifier(label: "Plain text", systemImage: "text.word.spacing")
-                .tag(2)
-
-            PreviewView(dataModel: dataModel)
-                .tabItemViewModifier(label: "Preview", systemImage: "doc.richtext")
-                .tag(3)
+        NavigationStack {
+            SavedDocumentsView(dataModel: dataModel)
         }
     }
 }

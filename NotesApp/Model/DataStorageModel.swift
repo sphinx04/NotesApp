@@ -7,18 +7,22 @@
 
 import Foundation
 import SwiftUI
-import RealmSwift
+import CoreData
 import Markdown
 import WebKit
 
-class DataStorageModel: ObservableObject {
-    @State var realmManager: RealmManager
-
-
+final class DataStorageModel: ObservableObject {
+    
+    private let viewContext = DataController.shared.viewContext
+    @Published var documents: [Document] = []
+    
+    
     @Published var selection: Range<String.Index>
-
+    
     @Published var currentText = ""
     @Published var currentName = ""
+
+    @Published var searchText = ""
 
     @Published var currentPreview: Markdown = Markdown(content: .constant("init"))
     @Published var exportFile = false
@@ -27,13 +31,50 @@ class DataStorageModel: ObservableObject {
     @Published var isTextFieldHidden: Bool = true
     @Published var isPreviewHidden: Bool = true
     @Published var isShareSheetPresented = false
-    @Published var currentDocumentId: ObjectId
-
-    init(realmManager: RealmManager) {
-        currentDocumentId = ObjectId()
-        self.selection = String().endIndex..<String().endIndex
-        self.realmManager = realmManager
-        if self.realmManager.documents.isEmpty {
+    @Published var currentDocumentId: UUID?
+    
+    init() {
+        self.selection = String().startIndex..<String().startIndex
+        fetchCompanyData()
+        addWelcome()
+    }
+    
+    func fetchCompanyData() {
+        let request = NSFetchRequest<Document>(entityName: "Document")
+        let sort = NSSortDescriptor(key: #keyPath(Document.lastModified), ascending: false)
+        request.sortDescriptors = [sort]
+        do {
+            documents = try viewContext.fetch(request)
+        }catch {
+            print("DEBUG: Some error occured while fetching")
+        }
+    }
+    
+    func addDocument(name: String, text: String, date: Date = .now) {
+        let document = Document(context: viewContext)
+        document.id = UUID()
+        document.name = name
+        document.text = text
+        document.lastModified = date
+        
+        save()
+        self.currentDocumentId = document.id
+        self.fetchCompanyData()
+    }
+    
+    func save() {
+        do {
+            try viewContext.save()
+            withAnimation {
+                fetchCompanyData()
+            }
+        } catch {
+            print("Error saving")
+        }
+    }
+    
+    private func addWelcome() {
+        if self.documents.isEmpty {
             let name = "Welcome"
             let text = #"""
 # Welcome to Markdown Editing App!
@@ -124,54 +165,49 @@ You can create task lists using square brackets:
 To highlight inline code, use single backticks: `code here`.
 
 """#
-
-            let newDoc = Document(value: ["name": name,
-                                                "text": text,
-                                                "lastModified": Date.now])
-
-            self.realmManager.addDocument(document: newDoc)
-            self.currentDocumentId = newDoc.id
+            
+            addDocument(name: name, text: text)
         }
-        self.currentDocumentId = self.realmManager.documents[0].id
     }
-
-    func addDocument(name: String, text: String) {
-        let newDoc = Document(value: ["name": name,
-                                            "text": text,
-                                            "lastModified": Date.now])
-        realmManager.addDocument(document: newDoc)
-        currentDocumentId = newDoc.id
+    
+    //    func addDocument(document: Document) {
+    //        realmManager.addDocument(document: document)
+    //    }
+    
+    func removeDocument(id: UUID) {
+        let index = documents.firstIndex(where: { $0.id == id })
+        if let index {
+            viewContext.delete(documents[index])
+            documents.remove(at: index)
+            save()
+        }
     }
-
-    func addDocument(document: Document) {
-        realmManager.addDocument(document: document)
-    }
-
-    func removeDocument(id: ObjectId) {
-        realmManager.deleteDocument(id: id)
-        currentDocumentId = realmManager.documents[0].id
-    }
-
-    func setCurrentDocument(id: ObjectId) {
+    
+    func setCurrentDocument(id: UUID) {
         currentDocumentId = id
     }
-
+    
     func setCurrentName(_ name: String) {
         currentName = name
-        realmManager.updateDocument(id: currentDocumentId, name: name)
+        let document = documents.first(where: { $0.id == currentDocumentId })
+        document?.name = name
+        document?.lastModified = .now
+        save()
     }
-
+    
     func setCurrentText(_ text: String) {
         currentText = text
-        realmManager.updateDocument(id: currentDocumentId, text: text)
+        let document = documents.first(where: { $0.id == currentDocumentId })
+        document?.text = text
+        document?.lastModified = .now
+        save()
     }
-
+    
     func getCurrentName() -> String {
-        return realmManager.getByID(currentDocumentId)?.name ?? "Error"
+        return documents.first(where: { $0.id == currentDocumentId })?.name ?? "Error"
     }
-
+    
     func getCurrentText() -> String {
-        print("CURRENT TEXT in model (get):", realmManager.getByID(currentDocumentId)?.text ?? "Error")
-        return realmManager.getByID(currentDocumentId)?.text ?? "Error"
+        return documents.first(where: { $0.id == currentDocumentId })?.text ?? "Error"
     }
 }
